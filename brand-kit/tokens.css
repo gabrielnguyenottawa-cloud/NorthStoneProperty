@@ -1,0 +1,21 @@
+/* NorthStone Property — design tokens v1.0 */
+:root {
+  --ns-midnight-navy: #081E34;  /* brand anchor: headers, headings, dark surfaces */
+  --ns-ink-soft:      #11294A;  /* layering & hover on midnight */
+  --ns-action-navy:   #14375E;  /* buttons & links */
+  --ns-navy-tint:     #E9EEF5;  /* highlight chips, selected states */
+  --ns-stone:         #736C63;  /* eyebrows & accents on light */
+  --ns-stone-light:   #B8B1A7;  /* stone substitute on dark surfaces */
+  --ns-mist:          #F4F6F8;  /* alternate section background */
+  --ns-line:          #E2E8EE;  /* hairline borders */
+  --ns-body:          #2A3745;  /* body copy */
+  --ns-muted:         #5B6B7C;  /* captions, metadata */
+
+  --ns-font-display: 'Source Serif 4', Georgia, serif;
+  --ns-font-body: 'Figtree', system-ui, sans-serif;
+
+  --ns-radius-card: 16px;
+  --ns-radius-button: 999px;
+  --ns-shadow-soft: 0 8px 30px rgb(8 30 52 / 0.08);
+  --ns-shadow-lift: 0 16px 48px rgb(8 30 52 / 0.14);
+}

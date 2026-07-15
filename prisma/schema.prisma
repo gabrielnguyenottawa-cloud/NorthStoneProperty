@@ -1,0 +1,152 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Province {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  code      String   @unique // ON, BC, AB, NS...
+  published Boolean  @default(true)
+  cities    City[]
+  createdAt DateTime @default(now())
+}
+
+model City {
+  id              String        @id @default(cuid())
+  name            String
+  slug            String
+  province        Province      @relation(fields: [provinceId], references: [id])
+  provinceId      String
+  metaTitle       String?
+  metaDescription String?
+  heroHeadline    String?
+  intro           String        @db.Text // localized opening copy
+  marketInsights  String?       @db.Text // local market section (markdown)
+  neighbourhoods  String[]      @default([])
+  latitude        Float?
+  longitude       Float?
+  published       Boolean       @default(true)
+  faqs            Faq[]
+  testimonials    Testimonial[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([provinceId, slug])
+  @@index([slug])
+}
+
+model Category {
+  id    String     @id @default(cuid())
+  name  String     @unique
+  slug  String     @unique
+  posts BlogPost[]
+}
+
+enum PostStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+}
+
+model BlogPost {
+  id               String     @id @default(cuid())
+  title            String
+  slug             String     @unique
+  excerpt          String     @db.Text
+  content          String     @db.Text // markdown
+  coverImage       String?
+  coverImageAlt    String?
+  metaTitle        String?
+  metaDescription  String?
+  targetKeyword    String? // the single keyword this article targets
+  status           PostStatus @default(DRAFT)
+  publishedAt      DateTime?
+  scheduledFor     DateTime?
+  category         Category?  @relation(fields: [categoryId], references: [id])
+  categoryId       String?
+  relatedCitySlugs String[]   @default([]) // "on/ottawa" style refs for internal linking
+  faqs             Faq[]
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  @@index([status, publishedAt])
+}
+
+model SituationPage {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  metaTitle       String?
+  metaDescription String?
+  intro           String   @db.Text
+  content         String   @db.Text // markdown
+  published       Boolean  @default(true)
+  faqs            Faq[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Faq {
+  id          String         @id @default(cuid())
+  question    String
+  answer      String         @db.Text
+  sortOrder   Int            @default(0)
+  isGlobal    Boolean        @default(false) // shown on /faq
+  city        City?          @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  cityId      String?
+  post        BlogPost?      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId      String?
+  situation   SituationPage? @relation(fields: [situationId], references: [id], onDelete: Cascade)
+  situationId String?
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  location  String // "Ottawa, ON"
+  quote     String   @db.Text
+  rating    Int      @default(5)
+  featured  Boolean  @default(false)
+  city      City?    @relation(fields: [cityId], references: [id], onDelete: SetNull)
+  cityId    String?
+  createdAt DateTime @default(now())
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  OFFER_MADE
+  CLOSED
+  ARCHIVED
+}
+
+model Lead {
+  id           String     @id @default(cuid())
+  name         String
+  phone        String
+  email        String
+  address      String
+  city         String
+  province     String
+  postalCode   String
+  propertyType String
+  condition    String
+  timeline     String
+  reason       String
+  notes        String?    @db.Text
+  consent      Boolean
+  sourcePath   String? // page the lead converted on
+  status       LeadStatus @default(NEW)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([status, createdAt])
+}
