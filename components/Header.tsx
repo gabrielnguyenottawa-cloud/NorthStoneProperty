@@ -19,7 +19,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-ink text-white shadow-soft">
-      <div className="mx-auto flex h-24 max-w-6xl items-center justify-between gap-6 px-6 sm:px-9">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-6 sm:h-24 sm:px-9">
         <Link href="/" className="relative flex shrink-0 items-center" aria-label={`${site.name} — home`}>
           <span aria-hidden="true" className="absolute -inset-3 rounded-full bg-white/10 blur-md" />
           <Image
@@ -28,7 +28,7 @@ export function Header() {
             width={1133}
             height={711}
             priority
-            className="relative h-20 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]"
+            className="relative h-11 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] sm:h-20"
           />
         </Link>
 
@@ -53,7 +53,7 @@ export function Header() {
           </a>
           <Link
             href="/get-offer"
-            className="whitespace-nowrap rounded-full bg-navy px-5 py-3 text-[21px] font-semibold text-white transition-colors hover:bg-navy-deep"
+            className="whitespace-nowrap rounded-full bg-navy px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-navy-deep sm:px-5 sm:py-3 sm:text-[21px]"
           >
             Get my cash offer
           </Link>
@@ -63,9 +63,9 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="rounded-md p-3 text-white/90 lg:hidden"
+            className="rounded-md p-2 text-white/90 sm:p-3 lg:hidden"
           >
-            <svg width="33" height="33" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg className="h-[22px] w-[22px] sm:h-[33px] sm:w-[33px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
             </svg>
           </button>
