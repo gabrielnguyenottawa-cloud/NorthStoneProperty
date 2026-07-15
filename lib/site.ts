@@ -3,8 +3,8 @@ export const site = {
   legalName: "NorthStone Property Inc.",
   tagline: "Real estate solutions built on trust",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.northstoneproperty.ca",
-  phone: "1-800-555-0139",
-  phoneHref: "tel:+18005550139",
+  phone: "343-500-9275",
+  phoneHref: "tel:+13435009275",
   email: "offers@northstoneproperty.ca",
   address: {
     streetAddress: "100 Queen Street, Suite 800",
