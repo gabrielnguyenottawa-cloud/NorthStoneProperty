@@ -19,8 +19,8 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-ink text-white shadow-soft">
-      <div className="mx-auto flex h-24 max-w-6xl items-center justify-between gap-9 px-6 sm:px-9">
-        <Link href="/" className="relative flex items-center" aria-label={`${site.name} — home`}>
+      <div className="mx-auto flex h-24 max-w-6xl items-center justify-between gap-6 px-6 sm:px-9">
+        <Link href="/" className="relative flex shrink-0 items-center" aria-label={`${site.name} — home`}>
           <span aria-hidden="true" className="absolute -inset-3 rounded-full bg-white/10 blur-md" />
           <Image
             src="/logo-reverse.png"
@@ -32,28 +32,28 @@ export function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-[42px] lg:flex" aria-label="Main">
+        <nav className="hidden shrink items-center gap-6 lg:flex" aria-label="Main">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-[21px] text-white/80 transition-colors hover:text-white"
+              className="whitespace-nowrap text-[21px] text-white/80 transition-colors hover:text-white"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-[18px]">
+        <div className="flex shrink-0 items-center gap-3">
           <a
             href={site.phoneHref}
-            className="hidden text-[21px] font-medium text-white/80 hover:text-white md:inline"
+            className="hidden whitespace-nowrap text-[21px] font-medium text-white/80 hover:text-white xl:inline"
           >
             {site.phone}
           </a>
           <Link
             href="/get-offer"
-            className="rounded-full bg-navy px-6 py-3 text-[21px] font-semibold text-white transition-colors hover:bg-navy-deep"
+            className="whitespace-nowrap rounded-full bg-navy px-5 py-3 text-[21px] font-semibold text-white transition-colors hover:bg-navy-deep"
           >
             Get my cash offer
           </Link>
