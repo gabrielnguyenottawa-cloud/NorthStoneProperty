@@ -19,40 +19,41 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-ink text-white shadow-soft">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
-        <Link href="/" className="flex items-center" aria-label={`${site.name} — home`}>
+      <div className="mx-auto flex h-24 max-w-6xl items-center justify-between gap-9 px-6 sm:px-9">
+        <Link href="/" className="relative flex items-center" aria-label={`${site.name} — home`}>
+          <span aria-hidden="true" className="absolute -inset-3 rounded-full bg-white/10 blur-md" />
           <Image
             src="/logo-reverse.png"
             alt={site.name}
             width={1133}
             height={711}
             priority
-            className="h-11 w-auto"
+            className="relative h-20 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]"
           />
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-[42px] lg:flex" aria-label="Main">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm text-white/80 transition-colors hover:text-white"
+              className="text-[21px] text-white/80 transition-colors hover:text-white"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-[18px]">
           <a
             href={site.phoneHref}
-            className="hidden text-sm font-medium text-white/80 hover:text-white md:inline"
+            className="hidden text-[21px] font-medium text-white/80 hover:text-white md:inline"
           >
             {site.phone}
           </a>
           <Link
             href="/get-offer"
-            className="rounded-full bg-navy px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-navy-deep"
+            className="rounded-full bg-navy px-6 py-3 text-[21px] font-semibold text-white transition-colors hover:bg-navy-deep"
           >
             Get my cash offer
           </Link>
@@ -62,9 +63,9 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="rounded-md p-2 text-white/90 lg:hidden"
+            className="rounded-md p-3 text-white/90 lg:hidden"
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg width="33" height="33" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
             </svg>
           </button>
@@ -73,18 +74,18 @@ export function Header() {
 
       {open && (
         <nav id="mobile-nav" aria-label="Mobile" className="border-t border-white/10 bg-ink lg:hidden">
-          <div className="mx-auto max-w-6xl space-y-1 px-4 py-4">
+          <div className="mx-auto max-w-6xl space-y-1.5 px-6 py-6">
             {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="block rounded-md px-3 py-2.5 text-white/85 hover:bg-white/5"
+                className="block rounded-md px-[18px] py-[15px] text-2xl text-white/85 hover:bg-white/5"
               >
                 {item.label}
               </Link>
             ))}
-            <a href={site.phoneHref} className="block rounded-md px-3 py-2.5 font-medium text-stone-light">
+            <a href={site.phoneHref} className="block rounded-md px-[18px] py-[15px] text-2xl font-medium text-stone-light">
               Call {site.phone}
             </a>
           </div>

@@ -46,6 +46,7 @@ export function ExitIntent() {
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/get-offer"
+            onClick={() => setShow(false)}
             className="flex-1 rounded-full bg-navy px-5 py-3 text-center font-semibold text-white hover:bg-navy-deep"
           >
             Get my free offer
