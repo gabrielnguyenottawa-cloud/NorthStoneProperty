@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { buildMetadata } from "@/lib/seo";
 import { getProvincesWithCities, getPublishedPosts, getSituations, getTestimonials } from "@/lib/queries";
 import { LeadForm } from "@/components/LeadForm";
@@ -35,11 +36,22 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero — headline + inline lead form */}
-      <section className="bg-mist">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:py-24">
+      {/* Hero — headline + inline lead form over a real home photo */}
+      <section className="relative overflow-hidden bg-mist">
+        <div className="absolute inset-y-0 right-0 hidden w-[52%] lg:block" aria-hidden="true">
+          <Image
+            src="/images/hero-warm.jpg"
+            alt=""
+            fill
+            priority
+            sizes="52vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-mist via-mist/25 to-transparent" />
+        </div>
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:py-24">
           <div className="animate-rise">
-            <p className="eyebrow">Direct home buyers · Canada-wide</p>
+            <p className="eyebrow">Direct home buyers · Ontario</p>
             <h1 className="mt-4 text-4xl font-bold leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
               Sell your house on your terms. Not the market's.
             </h1>
@@ -56,6 +68,15 @@ export default async function HomePage() {
                 </li>
               ))}
             </ul>
+            <div className="relative mt-10 h-56 overflow-hidden rounded-2xl shadow-soft sm:h-72 lg:hidden">
+              <Image
+                src="/images/hero-warm.jpg"
+                alt="A detached family home with a wraparound porch on a quiet street"
+                fill
+                sizes="(max-width: 1024px) 100vw, 0px"
+                className="object-cover"
+              />
+            </div>
           </div>
           <div className="animate-rise-late rounded-2xl bg-white p-6 shadow-lift sm:p-8">
             <h2 className="text-xl font-bold">Get your free cash offer</h2>
@@ -82,20 +103,34 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Promises */}
+      {/* Promises — photo + checklist, not another card grid */}
       <section className="bg-mist">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading
-            eyebrow="Why homeowners choose us"
-            title="A professional sale, without the process"
-          />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {promises.map((p) => (
-              <div key={p.title} className="rounded-2xl border border-line bg-white p-7 shadow-soft">
-                <h3 className="text-lg font-bold">{p.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted">{p.body}</p>
-              </div>
-            ))}
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+          <div className="relative h-72 overflow-hidden rounded-2xl shadow-lift sm:h-96 lg:h-[520px]">
+            <Image
+              src="/images/trust-porch.jpg"
+              alt="A brick family home in the early evening light"
+              fill
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <SectionHeading
+              eyebrow="Why homeowners choose us"
+              title="A professional sale, without the process"
+            />
+            <ul className="mt-10 space-y-7">
+              {promises.map((p) => (
+                <li key={p.title} className="flex gap-4">
+                  <span aria-hidden="true" className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-navy-tint text-sm font-bold text-navy">✓</span>
+                  <div>
+                    <h3 className="text-lg font-bold">{p.title}</h3>
+                    <p className="mt-1 leading-relaxed text-muted">{p.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

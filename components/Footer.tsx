@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/lib/site";
-import { LeadForm } from "./LeadForm";
 
 const columns = [
   {
@@ -41,27 +40,32 @@ const columns = [
 export function Footer() {
   return (
     <footer className="bg-ink text-white">
-      {/* Footer lead form */}
+      {/* Footer close — one warm invitation, not another form */}
       <div className="border-b border-white/10">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-16">
+        <div className="mx-auto flex max-w-6xl flex-col items-start gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <p className="eyebrow">One last thing</p>
-            <h2 className="mt-3 text-3xl font-bold text-white">
+            <h2 className="mt-3 max-w-xl text-3xl font-bold text-white">
               Find out what your home is worth to us
             </h2>
             <p className="mt-4 max-w-md text-white/70">
-              A written cash offer within 24 hours. No obligation, no fees, and
-              no pressure — many homeowners simply use our offer as a benchmark.
-            </p>
-            <p className="mt-6 text-sm text-white/60">
-              Prefer to talk?{" "}
-              <a href={site.phoneHref} className="font-semibold text-stone-light hover:underline">
-                {site.phone}
-              </a>
+              No obligation, no fees, and no pressure — many homeowners simply
+              use our offer as a benchmark.
             </p>
           </div>
-          <div className="rounded-2xl bg-white p-6 shadow-lift sm:p-8">
-            <LeadForm compact sourceSuffix="footer" />
+          <div className="flex flex-col items-start gap-4">
+            <a
+              href={site.phoneHref}
+              className="text-3xl font-bold tracking-tight text-white hover:text-stone-light sm:text-4xl"
+            >
+              {site.phone}
+            </a>
+            <Link
+              href="/get-offer"
+              className="rounded-full bg-white px-7 py-3.5 font-semibold text-ink transition-colors hover:bg-navy-tint"
+            >
+              Get my cash offer
+            </Link>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@
   --color-mist: #f4f6f8;
   --color-line: #e2e8ee;
   --color-body: #2a3745;
-  --color-muted: #5b6b7c;
+  --color-muted: #4c5e70;
   --color-navy: #14375e;
   --color-navy-deep: #081e34;
   --color-navy-tint: #e9eef5;
@@ -27,6 +27,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* 17px base — the audience skews older; every rem-based size scales up with this */
+  font-size: 106.25%;
 }
 
 body {
