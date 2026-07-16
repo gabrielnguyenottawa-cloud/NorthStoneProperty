@@ -60,7 +60,7 @@ export default function WhyChooseUsPage() {
         <p className="mt-8 leading-relaxed text-muted">
           Our recommendation, genuinely: if your home is in good condition and
           you can comfortably wait three to four months, get a listing
-          valuation too. Then get our written offer, compare the *net* numbers
+          valuation too. Then get our written offer, compare the <em>net</em> numbers
           after commissions, repairs, and carrying costs — and choose the path
           that fits your life.
         </p>

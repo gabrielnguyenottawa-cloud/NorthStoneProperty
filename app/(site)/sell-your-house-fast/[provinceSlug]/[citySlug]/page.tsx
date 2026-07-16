@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { buildMetadata } from "@/lib/seo";
 import { faqSchema, localBusinessSchema } from "@/lib/schema";
 import { cityPath, getCity, getProvincesWithCities, getPublishedPosts, getRelatedCities } from "@/lib/queries";
@@ -70,8 +71,19 @@ export default async function CityPage({ params }: { params: Promise<Params> }) 
       />
 
       {/* Hero */}
-      <section className="bg-mist">
-        <div className="mx-auto max-w-6xl px-4 pb-16 pt-8 sm:px-6 lg:pb-20">
+      <section className="relative overflow-hidden bg-mist">
+        <div className="absolute inset-y-0 right-0 hidden w-[52%] lg:block" aria-hidden="true">
+          <Image
+            src="/images/city-street.jpg"
+            alt=""
+            fill
+            priority
+            sizes="52vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-mist via-mist/25 to-transparent" />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-8 sm:px-6 lg:pb-20">
           <Breadcrumbs
             items={[
               { name: "Cities", path: "/cities" },
@@ -96,6 +108,15 @@ export default async function CityPage({ params }: { params: Promise<Params> }) 
                   </li>
                 ))}
               </ul>
+              <div className="relative mt-10 h-56 overflow-hidden rounded-2xl shadow-soft sm:h-72 lg:hidden">
+                <Image
+                  src="/images/city-street.jpg"
+                  alt="A residential street of detached brick homes"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 0px"
+                  className="object-cover"
+                />
+              </div>
             </div>
             <div className="rounded-2xl bg-white p-6 shadow-lift sm:p-8">
               <h2 className="text-xl font-bold">Get your {city.name} cash offer</h2>

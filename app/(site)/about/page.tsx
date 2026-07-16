@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { buildMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
@@ -33,39 +34,53 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-3xl space-y-6 px-4 py-16 leading-relaxed text-body sm:px-6">
-        <p>
-          We started NorthStone after watching too many homeowners get squeezed
-          between two bad options: months of showings and uncertainty on the
-          open market, or lowball pressure tactics from buyers who treated
-          "distressed" as an invitation.
-        </p>
-        <p>
-          We believed there was a third way — a direct sale run like a
-          professional transaction. Written offers with the math shown.
-          Independent lawyers on both sides. Closing dates chosen by the
-          seller. No fees, no pressure, and no surprises at the closing table.
-        </p>
-        <p>
-          Today we buy homes across Ontario, British Columbia, Alberta, and
-          Nova Scotia — many of them inherited properties, homes with tenants,
-          houses that need significant work, or sales driven by a deadline the
-          traditional market can't meet. We renovate them and return them to
-          their communities as quality housing.
-        </p>
+      <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+        <div className="relative order-last h-64 overflow-hidden rounded-2xl shadow-lift sm:h-80 lg:order-first lg:h-[440px]">
+          <Image
+            src="/images/porch-welcome.jpg"
+            alt="A welcoming front porch with a swing bench"
+            fill
+            sizes="(max-width: 1024px) 100vw, 45vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="space-y-6 leading-relaxed text-body">
+          <p>
+            We started NorthStone after watching too many homeowners get squeezed
+            between two bad options: months of showings and uncertainty on the
+            open market, or lowball pressure tactics from buyers who treated
+            "distressed" as an invitation.
+          </p>
+          <p>
+            We believed there was a third way — a direct sale run like a
+            professional transaction. Written offers with the math shown.
+            Independent lawyers on both sides. Closing dates chosen by the
+            seller. No fees, no pressure, and no surprises at the closing table.
+          </p>
+          <p>
+            Today we buy homes across Ontario, British Columbia, Alberta, and
+            Nova Scotia — many of them inherited properties, homes with tenants,
+            houses that need significant work, or sales driven by a deadline the
+            traditional market can't meet. We renovate them and return them to
+            their communities as quality housing.
+          </p>
+        </div>
       </section>
 
       <section className="bg-mist">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <SectionHeading eyebrow="How we operate" title="What we hold ourselves to" />
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <ul className="mt-10 grid gap-x-14 gap-y-8 lg:grid-cols-2">
             {values.map((v) => (
-              <div key={v.title} className="rounded-2xl border border-line bg-white p-7 shadow-soft">
-                <h3 className="text-lg font-bold">{v.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted">{v.body}</p>
-              </div>
+              <li key={v.title} className="flex gap-4">
+                <span aria-hidden="true" className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-navy-tint text-sm font-bold text-navy">✓</span>
+                <div>
+                  <h3 className="text-lg font-bold">{v.title}</h3>
+                  <p className="mt-1 leading-relaxed text-muted">{v.body}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 

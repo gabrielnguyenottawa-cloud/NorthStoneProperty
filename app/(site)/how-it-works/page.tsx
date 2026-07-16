@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { buildMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProcessSteps } from "@/components/ProcessSteps";
@@ -59,20 +60,31 @@ export default function HowItWorksPage() {
       </section>
 
       <section className="bg-mist">
-        <div className="mx-auto max-w-3xl space-y-10 px-4 py-16 sm:px-6">
-          {detail.map((d) => (
-            <div key={d.step}>
-              <h2 className="text-2xl font-bold">{d.step}</h2>
-              <p className="mt-3 leading-relaxed text-muted">{d.body}</p>
-            </div>
-          ))}
-          <p className="leading-relaxed text-muted">
-            Want to understand how our offers compare to listing with an agent?
-            Read our honest breakdown:{" "}
-            <Link href="/blog/investor-vs-realtor" className="font-semibold text-navy hover:underline">
-              Should I sell to an investor or a realtor?
-            </Link>
-          </p>
+        <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+          <div className="relative h-64 overflow-hidden rounded-2xl shadow-lift sm:h-80 lg:sticky lg:top-24 lg:h-[460px]">
+            <Image
+              src="/images/front-door.jpg"
+              alt="The lit front entrance of a family home in the evening"
+              fill
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="space-y-10">
+            {detail.map((d) => (
+              <div key={d.step}>
+                <h2 className="text-2xl font-bold">{d.step}</h2>
+                <p className="mt-3 leading-relaxed text-muted">{d.body}</p>
+              </div>
+            ))}
+            <p className="leading-relaxed text-muted">
+              Want to understand how our offers compare to listing with an agent?
+              Read our honest breakdown:{" "}
+              <Link href="/blog/investor-vs-realtor" className="font-semibold text-navy hover:underline">
+                Should I sell to an investor or a realtor?
+              </Link>
+            </p>
+          </div>
         </div>
       </section>
 
