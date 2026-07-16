@@ -11,6 +11,7 @@ export function TestimonialCard({
 }) {
   const initials = name
     .split(" ")
+    .filter((part) => /^[a-zA-Z]/.test(part))
     .map((part) => part[0])
     .slice(0, 2)
     .join("")

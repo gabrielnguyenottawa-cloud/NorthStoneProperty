@@ -82,8 +82,8 @@ export function Footer() {
           />
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/60">
             A Canadian real estate investment company buying residential
-            properties directly from homeowners in Ontario, British Columbia,
-            Alberta, and Nova Scotia.
+            properties directly from homeowners across Ontario — expanding
+            soon to British Columbia, Alberta, and Nova Scotia.
           </p>
           <p className="mt-4 text-sm text-white/60">
             {site.address.streetAddress}

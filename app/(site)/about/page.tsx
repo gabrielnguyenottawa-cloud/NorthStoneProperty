@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 export const metadata = buildMetadata({
   title: "About NorthStone Property | Canadian Direct Home Buyers",
   description:
-    "Meet the Canadian real estate investment company behind hundreds of direct home purchases across Ontario, BC, Alberta, and Nova Scotia.",
+    "Meet the Canadian real estate investment company buying homes directly from owners across Ontario — professionally, transparently, on your timeline.",
   path: "/about",
 });
 
@@ -58,11 +58,12 @@ export default function AboutPage() {
             seller. No fees, no pressure, and no surprises at the closing table.
           </p>
           <p>
-            Today we buy homes across Ontario, British Columbia, Alberta, and
-            Nova Scotia — many of them inherited properties, homes with tenants,
-            houses that need significant work, or sales driven by a deadline the
-            traditional market can't meet. We renovate them and return them to
-            their communities as quality housing.
+            Today we buy homes across Ontario — many of them inherited
+            properties, homes with tenants, houses that need significant work,
+            or sales driven by a deadline the traditional market can't meet. We
+            renovate them and return them to their communities as quality
+            housing, and we're working on bringing the same service to British
+            Columbia, Alberta, and Nova Scotia.
           </p>
         </div>
       </section>

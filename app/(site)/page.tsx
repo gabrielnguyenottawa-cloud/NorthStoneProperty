@@ -13,9 +13,9 @@ import { CtaBand } from "@/components/CtaBand";
 export const revalidate = 3600;
 
 export const metadata = buildMetadata({
-  title: "We Buy Houses Across Canada | Fair Cash Offers in 24 Hours | NorthStone Property",
+  title: "We Buy Houses in Ontario | Fair Cash Offers in 24 Hours | NorthStone Property",
   description:
-    "Sell your house fast, as-is, with no fees or commissions. NorthStone Property buys homes directly from owners across Ontario, BC, Alberta & Nova Scotia. Written cash offer in 24 hours.",
+    "Sell your house fast, as-is, with no fees or commissions. NorthStone Property buys homes directly from owners across Ontario. Written cash offer in 24 hours.",
   path: "/",
 });
 
@@ -33,6 +33,8 @@ export default async function HomePage() {
     getSituations(),
     getTestimonials(true),
   ]);
+  const ontario = provinces.find((p) => p.code === "ON");
+  const expanding = provinces.filter((p) => p.code !== "ON");
 
   return (
     <>
@@ -172,31 +174,32 @@ export default async function HomePage() {
         </p>
       </section>
 
-      {/* Cities */}
+      {/* Cities — Ontario front and centre, other provinces coming soon */}
       <section className="bg-mist">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading
             eyebrow="Where we buy"
-            title="Serving homeowners across four provinces"
-            lede="From Toronto to Vancouver to Halifax — with more communities added regularly."
+            title="Serving homeowners across Ontario"
+            lede="From Ottawa to Windsor to Thunder Bay — with more communities added regularly."
           />
-          <div className="mt-12 space-y-10">
-            {provinces.map((province) => (
-              <div key={province.id}>
-                <h3 className="text-lg font-bold">{province.name}</h3>
-                <div className="mt-4 grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                  {province.cities.slice(0, 8).map((city) => (
-                    <CityCard key={city.id} city={{ ...city, province }} />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+          {ontario && (
+            <div className="mt-12 grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
+              {ontario.cities.slice(0, 12).map((city) => (
+                <CityCard key={city.id} city={{ ...city, province: ontario }} />
+              ))}
+            </div>
+          )}
           <p className="mt-10">
             <Link href="/cities" className="font-semibold text-navy hover:underline">
-              View every city we serve →
+              View every Ontario city we serve →
             </Link>
           </p>
+          {expanding.length > 0 && (
+            <p className="mt-6 border-t border-line pt-6 text-muted">
+              Expanding soon to{" "}
+              {expanding.map((p) => p.name).join(", ").replace(/, ([^,]*)$/, ", and $1")}.
+            </p>
+          )}
         </div>
       </section>
 
