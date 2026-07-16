@@ -7,14 +7,14 @@ import { cityPath, getCity, getProvincesWithCities, getPublishedPosts, getRelate
 import { prisma } from "@/lib/prisma";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
-import { LeadForm } from "@/components/LeadForm";
+import { QuickLeadForm } from "@/components/QuickLeadForm";
+import { QuickFormBand } from "@/components/QuickFormBand";
 import { Prose } from "@/components/Prose";
 import { FaqList } from "@/components/FaqList";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { CityCard } from "@/components/CityCard";
 import { PostCard } from "@/components/PostCard";
-import { CtaBand } from "@/components/CtaBand";
 import { SectionHeading } from "@/components/SectionHeading";
 
 export const revalidate = 3600; // ISR: refresh hourly as the CMS changes
@@ -97,8 +97,11 @@ export default async function CityPage({ params }: { params: Promise<Params> }) 
                 {city.name}, {city.province.code}
               </p>
               <h1 className="mt-4 text-4xl font-bold leading-[1.1] sm:text-5xl">
-                {city.heroHeadline ?? `Sell Your House Fast in ${city.name}`}
+                {city.heroHeadline ?? `We Buy Houses For Cash in ${city.name}`}
               </h1>
+              <p className="mt-5 text-xl font-semibold text-ink">
+                Fast closings. No repairs. No commissions.
+              </p>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">{city.intro}</p>
               <ul className="mt-8 grid max-w-lg grid-cols-1 gap-3 text-sm font-medium text-ink sm:grid-cols-3">
                 {["Offer in 24 hours", "Close in 14+ days", "$0 in fees"].map((item) => (
@@ -119,9 +122,9 @@ export default async function CityPage({ params }: { params: Promise<Params> }) 
               </div>
             </div>
             <div className="rounded-2xl bg-white p-6 shadow-lift sm:p-8">
-              <h2 className="text-xl font-bold">Get your {city.name} cash offer</h2>
-              <p className="mb-5 mt-1 text-sm text-muted">Free, written, and no-obligation.</p>
-              <LeadForm compact sourceSuffix="city-hero" defaultCity={city.name} defaultProvince={city.province.name} />
+              <h2 className="text-2xl font-bold">Get your {city.name} cash offer</h2>
+              <p className="mb-5 mt-1 text-muted">Two fields. Takes 30 seconds.</p>
+              <QuickLeadForm sourceSuffix="city-hero" defaultCity={city.name} defaultProvince={city.province.name} />
             </div>
           </div>
         </div>
@@ -211,9 +214,12 @@ export default async function CityPage({ params }: { params: Promise<Params> }) 
         </section>
       )}
 
-      <CtaBand
+      <QuickFormBand
         heading={`Ready to sell your ${city.name} home?`}
-        body="Get a written, no-obligation cash offer within 24 hours — and compare it against every other option with a clear head."
+        body="Address and phone number — that's all we need to start. Written offer within 24 hours."
+        sourceSuffix="city-closing"
+        defaultCity={city.name}
+        defaultProvince={city.province.name}
       />
 
       {/* Internal links: related cities + guides */}

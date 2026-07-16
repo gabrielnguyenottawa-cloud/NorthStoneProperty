@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { leadSchema } from "@/lib/leads";
+import { leadSchema, quickLeadSchema } from "@/lib/leads";
 import { site } from "@/lib/site";
 
 export async function POST(request: Request) {
@@ -9,6 +9,44 @@ export async function POST(request: Request) {
     json = await request.json();
   } catch {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  }
+
+  // Quick form: address + phone only, details gathered on the follow-up call.
+  const isQuick =
+    typeof json === "object" && json !== null && (json as { quick?: unknown }).quick === true;
+
+  if (isQuick) {
+    const parsed = quickLeadSchema.safeParse(json);
+    if (!parsed.success) {
+      const first = parsed.error.issues[0];
+      return NextResponse.json(
+        { error: first?.message ?? "Please check the form and try again." },
+        { status: 422 }
+      );
+    }
+    const data = parsed.data;
+    const lead = await prisma.lead.create({
+      data: {
+        name: "",
+        phone: data.phone,
+        email: "",
+        address: data.address,
+        city: data.city || "",
+        province: data.province || "Ontario",
+        postalCode: "",
+        propertyType: "Other",
+        condition: "Needs minor work",
+        timeline: "As soon as possible",
+        reason: "Quick form — ask on call",
+        notes: "Quick form lead (address + phone only). Gather details on the call.",
+        consent: true,
+        sourcePath: data.sourcePath ?? null,
+      },
+    });
+    await sendNotification(lead).catch((err) =>
+      console.error("Lead email notification failed:", err)
+    );
+    return NextResponse.json({ ok: true, id: lead.id }, { status: 201 });
   }
 
   const parsed = leadSchema.safeParse(json);
@@ -83,7 +121,7 @@ async function sendNotification(lead: {
   ]
     .map(
       ([k, v]) =>
-        `<tr><td style="padding:6px 12px;font-weight:600">${k}</td><td style="padding:6px 12px">${v}</td></tr>`
+        `<tr><td style="padding:6px 12px;font-weight:600">${k}</td><td style="padding:6px 12px">${v || "—"}</td></tr>`
     )
     .join("");
 
@@ -96,7 +134,7 @@ async function sendNotification(lead: {
     body: JSON.stringify({
       from: process.env.LEAD_NOTIFICATION_FROM ?? `Leads <leads@${new URL(site.url).hostname}>`,
       to: [to],
-      subject: `New seller lead: ${lead.city}, ${lead.province} — ${lead.timeline}`,
+      subject: `New seller lead: ${lead.city || lead.address}, ${lead.province} — ${lead.timeline}`,
       html: `<h2>New seller lead</h2><table style="border-collapse:collapse;font-family:sans-serif;font-size:14px">${rows}</table><p><a href="${site.url}/admin/leads">Open in the dashboard →</a></p>`,
     }),
   });

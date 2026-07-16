@@ -31,6 +31,19 @@ export const leadSchema = z.object({
 
 export type LeadInput = z.infer<typeof leadSchema>;
 
+/** Short-form variant: address + phone only. Everything else is gathered on
+ *  the follow-up call. Converts far better with older sellers. */
+export const quickLeadSchema = z.object({
+  quick: z.literal(true),
+  phone: z.string().min(7, "Please enter a valid phone number").max(25),
+  address: z.string().min(4, "Please enter the property address").max(200),
+  city: z.string().max(80).optional().or(z.literal("")),
+  province: z.string().max(40).optional().or(z.literal("")),
+  sourcePath: z.string().max(300).optional(),
+});
+
+export type QuickLeadInput = z.infer<typeof quickLeadSchema>;
+
 export const propertyTypes = leadSchema.shape.propertyType.options;
 export const conditions = leadSchema.shape.condition.options;
 export const timelines = leadSchema.shape.timeline.options;

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/lib/site";
+import { cityPath, getProvincesWithCities } from "@/lib/queries";
 
 const columns = [
   {
@@ -37,7 +38,10 @@ const columns = [
   },
 ];
 
-export function Footer() {
+export async function Footer() {
+  const provinces = await getProvincesWithCities().catch(() => []);
+  const ontario = provinces.find((p) => p.code === "ON");
+
   return (
     <footer className="bg-ink text-white">
       {/* Footer close — one warm invitation, not another form */}
@@ -109,6 +113,29 @@ export function Footer() {
           </nav>
         ))}
       </div>
+
+      {/* City links — every Ontario landing page, linked from every page */}
+      {ontario && ontario.cities.length > 0 && (
+        <div className="border-t border-white/10">
+          <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white/50">
+              We buy houses across Ontario
+            </h3>
+            <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3 lg:grid-cols-5">
+              {ontario.cities.map((city) => (
+                <li key={city.id}>
+                  <Link
+                    href={cityPath(ontario.slug, city.slug)}
+                    className="text-xs text-white/60 hover:text-white"
+                  >
+                    We buy houses in {city.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between sm:px-6">
