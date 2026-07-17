@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Logo } from "./Logo";
+import Image from "next/image";
 import { useState } from "react";
 import { site } from "@/lib/site";
 
@@ -9,8 +9,9 @@ const nav = [
   { label: "How It Works", href: "/how-it-works" },
   { label: "Situations", href: "/situations" },
   { label: "Cities", href: "/cities" },
+  { label: "Referral Rewards", href: "/referrals" },
+  { label: "Reviews", href: "/testimonials" },
   { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
   { label: "FAQ", href: "/faq" },
 ];
 
@@ -19,9 +20,16 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-ink text-white shadow-soft">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
         <Link href="/" className="flex items-center" aria-label={`${site.name} — home`}>
-          <Logo reverse />
+          <Image
+            src="/logo-reverse.png"
+            alt={site.name}
+            width={1133}
+            height={711}
+            priority
+            className="h-16 w-auto"
+          />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Main">

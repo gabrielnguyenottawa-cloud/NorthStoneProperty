@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Logo } from "./Logo";
+import Image from "next/image";
 import { site } from "@/lib/site";
 import { cityPath, getProvincesWithCities } from "@/lib/queries";
+import { QuickLeadForm } from "./QuickLeadForm";
 
 const columns = [
   {
@@ -58,19 +59,16 @@ export async function Footer() {
               use our offer as a benchmark.
             </p>
           </div>
-          <div className="flex flex-col items-start gap-4">
-            <a
-              href={site.phoneHref}
-              className="text-3xl font-bold tracking-tight text-white hover:text-stone-light sm:text-4xl"
-            >
-              {site.phone}
-            </a>
-            <Link
-              href="/get-offer"
-              className="rounded-full bg-white px-7 py-3.5 font-semibold text-ink transition-colors hover:bg-navy-tint"
-            >
-              Get my cash offer
-            </Link>
+          <div className="w-full max-w-md">
+            <div className="rounded-2xl bg-white p-6 shadow-lift">
+              <QuickLeadForm sourceSuffix="footer" defaultProvince="Ontario" />
+            </div>
+            <p className="mt-4 text-center text-white/70">
+              Prefer to talk?{" "}
+              <a href={site.phoneHref} className="font-bold text-white hover:underline">
+                {site.phone}
+              </a>
+            </p>
           </div>
         </div>
       </div>
@@ -78,7 +76,13 @@ export async function Footer() {
       {/* Link columns */}
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
         <div>
-          <Logo reverse />
+          <Image
+            src="/logo-reverse.png"
+            alt={site.name}
+            width={1133}
+            height={711}
+            className="h-16 w-auto"
+          />
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/60">
             A Canadian real estate investment company buying residential
             properties directly from homeowners across Ontario — expanding

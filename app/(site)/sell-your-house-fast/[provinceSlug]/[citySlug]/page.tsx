@@ -102,6 +102,10 @@ export default async function CityPage({ params }: { params: Promise<Params> }) 
               <p className="mt-5 text-xl font-semibold text-ink">
                 Fast closings. No repairs. No commissions.
               </p>
+              <p className="mt-2 text-lg font-semibold text-stone">
+                <span aria-hidden="true">★★★★★</span>
+                <span className="ml-2 text-base font-medium text-muted">rated 5 stars by our sellers</span>
+              </p>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">{city.intro}</p>
               <ul className="mt-8 grid max-w-lg grid-cols-1 gap-3 text-sm font-medium text-ink sm:grid-cols-3">
                 {["Offer in 24 hours", "Close in 14+ days", "$0 in fees"].map((item) => (

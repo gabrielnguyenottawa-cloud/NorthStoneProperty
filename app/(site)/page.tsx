@@ -4,6 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 import { getProvincesWithCities, getPublishedPosts, getSituations, getTestimonials } from "@/lib/queries";
 import { QuickLeadForm } from "@/components/QuickLeadForm";
 import { QuickFormBand } from "@/components/QuickFormBand";
+import { ComparisonTable } from "@/components/ComparisonTable";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TestimonialCard } from "@/components/TestimonialCard";
@@ -64,6 +65,10 @@ export default async function HomePage() {
             </h1>
             <p className="mt-5 text-xl font-semibold text-ink">
               Fast closings. No repairs. No commissions.
+            </p>
+            <p className="mt-2 text-lg font-semibold text-stone">
+              <span aria-hidden="true">★★★★★</span>
+              <span className="ml-2 text-base font-medium text-muted">rated 5 stars by our sellers</span>
             </p>
             <p className="mt-4 max-w-lg text-lg leading-relaxed text-muted">
               Tell us where the property is and how to reach you — that's it.
@@ -175,6 +180,19 @@ export default async function HomePage() {
               <p className="mt-2.5 leading-relaxed text-muted">{b.body}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Comparison table */}
+      <section className="mx-auto max-w-4xl px-4 pb-20 sm:px-6">
+        <SectionHeading
+          eyebrow="An honest comparison"
+          title="Selling to us vs. listing with an agent"
+          lede="A cash offer is typically below full retail price — that's the honest trade for speed, certainty, and zero costs. Here's the full picture."
+          center
+        />
+        <div className="mt-10">
+          <ComparisonTable />
         </div>
       </section>
 
