@@ -5,7 +5,7 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.northstoneproperty.ca",
   phone: "343-500-9275",
   phoneHref: "tel:+13435009275",
-  email: "offers@northstoneproperty.ca",
+  email: "contact@northstoneproperty.ca",
   address: {
     streetAddress: "100 Queen Street, Suite 800",
     addressLocality: "Ottawa",

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { Logo } from "./Logo";
 import { useState } from "react";
 import { site } from "@/lib/site";
 
@@ -21,14 +21,7 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-ink text-white shadow-soft">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
         <Link href="/" className="flex items-center" aria-label={`${site.name} — home`}>
-          <Image
-            src="/logo-reverse.png"
-            alt={site.name}
-            width={1133}
-            height={711}
-            priority
-            className="h-11 w-auto"
-          />
+          <Logo reverse />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Main">

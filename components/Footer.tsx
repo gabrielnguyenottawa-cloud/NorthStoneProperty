@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { Logo } from "./Logo";
 import { site } from "@/lib/site";
 import { cityPath, getProvincesWithCities } from "@/lib/queries";
 
@@ -11,6 +11,7 @@ const columns = [
       { label: "How it works", href: "/how-it-works" },
       { label: "Why choose us", href: "/why-choose-us" },
       { label: "Testimonials", href: "/testimonials" },
+      { label: "Referral program — earn $2,000", href: "/referrals" },
       { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/contact" },
     ],
@@ -77,13 +78,7 @@ export async function Footer() {
       {/* Link columns */}
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
         <div>
-          <Image
-            src="/logo-reverse.png"
-            alt={site.name}
-            width={1133}
-            height={711}
-            className="h-14 w-auto"
-          />
+          <Logo reverse />
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/60">
             A Canadian real estate investment company buying residential
             properties directly from homeowners across Ontario — expanding
@@ -94,6 +89,15 @@ export async function Footer() {
             <br />
             {site.address.addressLocality}, {site.address.addressRegion}{" "}
             {site.address.postalCode}
+          </p>
+          <p className="mt-4 text-sm">
+            <a href={site.phoneHref} className="font-semibold text-white/85 hover:text-white">
+              {site.phone}
+            </a>
+            <br />
+            <a href={`mailto:${site.email}`} className="text-white/70 hover:text-white">
+              {site.email}
+            </a>
           </p>
         </div>
         {columns.map((col) => (

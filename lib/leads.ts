@@ -44,6 +44,22 @@ export const quickLeadSchema = z.object({
 
 export type QuickLeadInput = z.infer<typeof quickLeadSchema>;
 
+/** Referral program: someone sends us a seller, earns $2,000 if the purchase closes. */
+export const referralSchema = z.object({
+  referral: z.literal(true),
+  referrerName: z.string().min(2, "Please enter your name").max(120),
+  referrerPhone: z.string().min(7, "Please enter your phone number").max(25),
+  referrerEmail: z.string().email("Please enter a valid email").optional().or(z.literal("")),
+  ownerName: z.string().max(120).optional().or(z.literal("")),
+  ownerPhone: z.string().min(7, "Please enter the owner's phone number").max(25),
+  address: z.string().min(4, "Please enter the property address").max(200),
+  city: z.string().max(80).optional().or(z.literal("")),
+  notes: z.string().max(2000).optional().or(z.literal("")),
+  sourcePath: z.string().max(300).optional(),
+});
+
+export type ReferralInput = z.infer<typeof referralSchema>;
+
 export const propertyTypes = leadSchema.shape.propertyType.options;
 export const conditions = leadSchema.shape.condition.options;
 export const timelines = leadSchema.shape.timeline.options;

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { leadSchema, quickLeadSchema } from "@/lib/leads";
+import { leadSchema, quickLeadSchema, referralSchema } from "@/lib/leads";
 import { site } from "@/lib/site";
 
 export async function POST(request: Request) {
@@ -9,6 +9,47 @@ export async function POST(request: Request) {
     json = await request.json();
   } catch {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  }
+
+  // Referral program: a third party sends us a seller, earns $2,000 at closing.
+  const isReferral =
+    typeof json === "object" && json !== null && (json as { referral?: unknown }).referral === true;
+
+  if (isReferral) {
+    const parsed = referralSchema.safeParse(json);
+    if (!parsed.success) {
+      const first = parsed.error.issues[0];
+      return NextResponse.json(
+        { error: first?.message ?? "Please check the form and try again." },
+        { status: 422 }
+      );
+    }
+    const data = parsed.data;
+    const referrerBits = [data.referrerName, data.referrerPhone, data.referrerEmail]
+      .filter(Boolean)
+      .join(", ");
+    const lead = await prisma.lead.create({
+      data: {
+        name: data.ownerName || "",
+        phone: data.ownerPhone,
+        email: "",
+        address: data.address,
+        city: data.city || "",
+        province: "Ontario",
+        postalCode: "",
+        propertyType: "Other",
+        condition: "Needs minor work",
+        timeline: "As soon as possible",
+        reason: "Referral",
+        notes: `REFERRAL LEAD — referred by ${referrerBits}. $2,000 payable to referrer if the purchase closes.${data.notes ? ` Notes: ${data.notes}` : ""}`,
+        consent: true,
+        sourcePath: data.sourcePath ?? null,
+      },
+    });
+    await sendNotification(lead).catch((err) =>
+      console.error("Lead email notification failed:", err)
+    );
+    return NextResponse.json({ ok: true, id: lead.id }, { status: 201 });
   }
 
   // Quick form: address + phone only, details gathered on the follow-up call.
