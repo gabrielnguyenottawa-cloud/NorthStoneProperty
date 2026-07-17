@@ -89,9 +89,9 @@ export function QuickLeadForm({ sourceSuffix, defaultCity, defaultProvince, inli
         <button
           type="submit"
           disabled={submitting}
-          className="w-full rounded-full bg-navy px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-navy-deep disabled:opacity-60 sm:w-auto"
+          className="w-full whitespace-nowrap rounded-md bg-navy px-7 py-3.5 text-base font-bold uppercase tracking-wide text-white transition-colors hover:bg-ink disabled:opacity-60 sm:w-auto"
         >
-          {submitting ? "Sending…" : "Get my cash offer"}
+          {submitting ? "Sending…" : "Get My Cash Offer"}
         </button>
       </div>
 

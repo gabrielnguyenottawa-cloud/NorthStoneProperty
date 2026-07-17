@@ -1,15 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { buildMetadata } from "@/lib/seo";
-import { getProvincesWithCities, getPublishedPosts, getSituations, getTestimonials } from "@/lib/queries";
+import { getProvincesWithCities, getSituations, getTestimonials, cityPath } from "@/lib/queries";
 import { QuickLeadForm } from "@/components/QuickLeadForm";
-import { QuickFormBand } from "@/components/QuickFormBand";
 import { ComparisonTable } from "@/components/ComparisonTable";
-import { ProcessSteps } from "@/components/ProcessSteps";
-import { SectionHeading } from "@/components/SectionHeading";
-import { TestimonialCard } from "@/components/TestimonialCard";
-import { PostCard } from "@/components/PostCard";
-import { CityCard } from "@/components/CityCard";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -21,276 +15,260 @@ export const metadata = buildMetadata({
   path: "/",
 });
 
-const benefits = [
-  { title: "No fees or commissions", body: "The offer we make is the amount you receive. We even cover standard closing costs." },
-  { title: "Sell completely as-is", body: "No repairs, no cleaning, no staging. Leave behind anything you don't want to move." },
-  { title: "You pick the closing date", body: "Fourteen days or four months — we close on your schedule, not ours." },
-  { title: "Your lawyer, your protection", body: "Every transaction closes through your own independent real estate lawyer." },
-  { title: "No showings, no open houses", body: "One visit from us — or a video walkthrough. No strangers through your home." },
-  { title: "A firm offer, in writing", body: "No financing or inspection conditions. When we make an offer, it sticks." },
+const steps = [
+  {
+    title: "Step 1: Tell Us About Your Property",
+    body: "Fill out the quick form or call us directly. Address and phone number is all we need to get started — there's nothing to prepare and nothing to clean.",
+  },
+  {
+    title: "Step 2: Get a Fair Cash Offer",
+    body: "We'll give you a no-obligation cash offer based on the true value of your house and honest local market conditions. There are no fees, no repairs, and no pressure to accept our offer.",
+  },
+  {
+    title: "Step 3: Choose Your Closing Date",
+    body: "You decide when to close. Whether you want to sell your house fast or need more time to prepare, we'll work with your schedule. Once you accept, we'll close on your timeline.",
+  },
 ];
 
-const extraReasons = ["Relocating for work or family", "Downsizing to something simpler", "Behind on mortgage payments", "Just want a fast, certain sale"];
+const extraReasons = [
+  "Relocating for work or family",
+  "Downsizing to something simpler",
+  "Behind on mortgage payments",
+  "Bad tenants or vacant rental",
+  "Retiring or moving to assisted living",
+  "Just want a fast, certain sale",
+];
 
 export default async function HomePage() {
-  const [provinces, posts, situations, testimonials] = await Promise.all([
+  const [provinces, situations, testimonials] = await Promise.all([
     getProvincesWithCities(),
-    getPublishedPosts(3),
     getSituations(),
     getTestimonials(true),
   ]);
   const ontario = provinces.find((p) => p.code === "ON");
-  const expanding = provinces.filter((p) => p.code !== "ON");
 
   return (
     <>
-      {/* Hero — headline + two-field quick form */}
-      <section className="relative overflow-hidden bg-mist">
-        <div className="absolute inset-y-0 right-0 hidden w-[52%] lg:block" aria-hidden="true">
-          <Image
-            src="/images/hero-warm.jpg"
-            alt=""
-            fill
-            priority
-            sizes="52vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-mist via-mist/25 to-transparent" />
-        </div>
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:py-24">
-          <div className="animate-rise">
-            <p className="eyebrow">Direct home buyers · Ontario</p>
-            <h1 className="mt-4 text-4xl font-bold leading-[1.08] sm:text-5xl lg:text-[3.3rem]">
-              We buy houses for cash in Ontario.
+      {/* Hero — white, headline left, photo right, inline form */}
+      <section className="bg-white">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-14 pt-10 sm:px-6 lg:grid-cols-[1.25fr_0.75fr]">
+          <div>
+            <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-[2.9rem]">
+              Sell Your House Fast In Ontario
             </h1>
-            <p className="mt-5 text-xl font-semibold text-ink">
-              Fast closings. No repairs. No commissions.
+            <p className="mt-4 text-2xl font-bold text-ink">
+              No Repairs. No Hassle. Just Sold.{" "}
+              <span aria-label="rated 5 stars" className="text-amber-500">★★★★★</span>
             </p>
-            <p className="mt-2 text-lg font-semibold text-stone">
-              <span aria-hidden="true">★★★★★</span>
-              <span className="ml-2 text-base font-medium text-muted">rated 5 stars by our sellers</span>
+            <p className="mt-4 max-w-2xl leading-relaxed text-muted">
+              At NorthStone Property, we buy houses in Ontario and make selling
+              your home simple, fast, and fair. If you're looking to sell your
+              house without the stress of repairs, showings, or agent fees,
+              we're here to help. As a trusted local cash home buyer, we
+              provide honest offers and a smooth process that puts you in
+              control.
             </p>
-            <p className="mt-4 max-w-lg text-lg leading-relaxed text-muted">
-              Tell us where the property is and how to reach you — that's it.
-              You'll get a written cash offer within 24 hours, and you deal
-              directly with a local buyer, not a call centre.
-            </p>
-            <div className="relative mt-10 h-56 overflow-hidden rounded-2xl shadow-soft sm:h-72 lg:hidden">
-              <Image
-                src="/images/hero-warm.jpg"
-                alt="A detached family home on a quiet street at golden hour"
-                fill
-                sizes="(max-width: 1024px) 100vw, 0px"
-                className="object-cover"
-              />
+            <div className="mt-7 max-w-2xl">
+              <QuickLeadForm sourceSuffix="hero" defaultProvince="Ontario" inline />
             </div>
-          </div>
-          <div className="animate-rise-late rounded-2xl bg-white p-6 shadow-lift sm:p-8">
-            <h2 className="text-2xl font-bold">Get your free cash offer</h2>
-            <p className="mb-5 mt-1 text-muted">Two fields. Takes 30 seconds.</p>
-            <QuickLeadForm sourceSuffix="hero" defaultProvince="Ontario" />
-            <p className="mt-5 border-t border-line pt-4 text-center text-sm text-muted">
-              Prefer to talk?{" "}
-              <a href={site.phoneHref} className="font-semibold text-navy hover:underline">
-                Call {site.phone}
+            <p className="mt-5">
+              <a href={site.phoneHref} className="inline-flex items-center gap-2 text-lg font-bold text-navy hover:underline">
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                CALL US! {site.phone}
               </a>
             </p>
           </div>
+          {/* Swap for Gabriel's cutout photo when it lands */}
+          <div className="relative hidden h-[380px] overflow-hidden rounded-xl lg:block">
+            <Image
+              src="/images/hero-warm.jpg"
+              alt="A family home purchased by NorthStone Property"
+              fill
+              priority
+              sizes="30vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 
-      {/* Trust strip */}
-      <section className="border-b border-line bg-white">
-        <ul className="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-4 py-6 text-sm font-semibold text-ink sm:px-6 lg:grid-cols-4">
-          {["Written offer in 24 hours", "Close in as little as 14 days", "$0 in fees or commissions", "Your own lawyer closes the sale"].map((item) => (
-            <li key={item} className="flex items-center gap-2.5">
-              <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy-tint text-xs text-navy">✓</span>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Process */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading
-          eyebrow="How it works"
-          title="Three steps between you and sold"
-          lede="We've removed everything that makes selling a home slow, expensive, and uncertain."
-        />
-        <div className="mt-12">
-          <ProcessSteps />
-        </div>
-        <div className="mt-10">
-          <Link href="/how-it-works" className="font-semibold text-navy hover:underline">
-            See the full process in detail →
-          </Link>
-        </div>
-      </section>
-
-      {/* Meet your buyer — swap image for Gabriel's photo when it lands */}
-      <section className="bg-mist">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-          <div className="relative h-72 overflow-hidden rounded-2xl shadow-lift sm:h-96 lg:h-[440px]">
+      {/* About — photo left, copy right */}
+      <section className="border-t border-line bg-mist">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
+          <div className="relative h-64 overflow-hidden rounded-xl sm:h-80">
             <Image
               src="/images/trust-porch.jpg"
-              alt="A family home with a wraparound porch"
+              alt="A house with a wraparound porch in Ontario"
               fill
-              sizes="(max-width: 1024px) 100vw, 42vw"
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
           </div>
           <div>
-            <SectionHeading
-              eyebrow="Who you're dealing with"
-              title="A local buyer, not a call centre"
-            />
-            <div className="mt-6 space-y-4 leading-relaxed text-body">
-              <p>
-                NorthStone Property is an Ottawa-based real estate investment
-                company. When you reach out, you talk to the person who
-                actually buys the house — not an answering service, not a
-                franchise, and never a pressure salesperson.
-              </p>
-              <p>
-                We explain every offer line by line, encourage you to compare
-                your options, and close through your own independent lawyer so
-                you're protected at every step.
-              </p>
-            </div>
-            <p className="mt-8">
-              <Link href="/about" className="font-semibold text-navy hover:underline">
-                More about us →
-              </Link>
+            <h2 className="text-3xl font-extrabold">We Buy Houses in Ontario</h2>
+            <p className="mt-4 leading-relaxed text-body">
+              We give homeowners a simple, stress-free way to sell their house.
+              Our mission is to provide clear solutions and fair cash offers so
+              that every homeowner feels confident about their next step.
+              Whether your house needs major repairs, you're facing a difficult
+              situation, or you simply want to skip the traditional listing
+              process, we make it easy.
             </p>
+            <p className="mt-4 leading-relaxed text-body">
+              No showings. No commissions. No conditions on financing or
+              inspection. One visit, a written offer within 24 hours, and your
+              own lawyer handles the closing.
+            </p>
+            <Link
+              href="/get-offer"
+              className="mt-7 inline-block rounded-md bg-navy px-7 py-3.5 font-bold uppercase tracking-wide text-white transition-colors hover:bg-ink"
+            >
+              Get My Cash Offer
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading
-          eyebrow="Why homeowners choose us"
-          title="A professional sale, without the process"
-        />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {benefits.map((b) => (
-            <div key={b.title} className="rounded-2xl border border-line bg-white p-7 shadow-soft">
-              <h3 className="text-lg font-bold">{b.title}</h3>
-              <p className="mt-2.5 leading-relaxed text-muted">{b.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Comparison table */}
-      <section className="mx-auto max-w-4xl px-4 pb-20 sm:px-6">
-        <SectionHeading
-          eyebrow="An honest comparison"
-          title="Selling to us vs. listing with an agent"
-          lede="A cash offer is typically below full retail price — that's the honest trade for speed, certainty, and zero costs. Here's the full picture."
-          center
-        />
-        <div className="mt-10">
-          <ComparisonTable />
-        </div>
-      </section>
-
-      {/* No matter your reason */}
-      <section className="bg-mist">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading
-            eyebrow="No matter your reason"
-            title="Whatever brought you here, we can help"
-            lede="These are the situations we work with every week — the guides explain your options honestly, including the ones that don't involve us."
-          />
-          <ul className="mt-12 grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
-            {situations.map((s) => (
-              <li key={s.slug}>
-                <Link
-                  href={`/situations/${s.slug}`}
-                  className="group flex items-center gap-3 font-semibold text-ink hover:text-navy"
-                >
-                  <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy-tint text-xs text-navy">✓</span>
-                  {s.title}
-                  <span aria-hidden="true" className="opacity-0 transition-opacity group-hover:opacity-100">→</span>
-                </Link>
-              </li>
-            ))}
-            {extraReasons.map((r) => (
-              <li key={r} className="flex items-center gap-3 font-semibold text-ink">
-                <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy-tint text-xs text-navy">✓</span>
-                {r}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow="Seller stories" title="What homeowners say afterward" center />
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {/* Reviews */}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <h2 className="text-center text-3xl font-extrabold">What Our Sellers Say</h2>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
           {testimonials.slice(0, 3).map((t) => (
-            <TestimonialCard key={t.id} name={t.name} location={t.location} quote={t.quote} rating={t.rating} />
+            <figure key={t.id} className="rounded-xl border border-line bg-white p-7 shadow-soft">
+              <div aria-label={`${t.rating} out of 5 stars`} className="text-xl text-amber-500">
+                {"★".repeat(t.rating)}
+              </div>
+              <blockquote className="mt-4 leading-relaxed text-body">“{t.quote}”</blockquote>
+              <figcaption className="mt-4 font-bold text-ink">
+                {t.name} <span className="font-medium text-muted">· {t.location}</span>
+              </figcaption>
+            </figure>
           ))}
         </div>
         <p className="mt-8 text-center">
-          <Link href="/testimonials" className="font-semibold text-navy hover:underline">
-            Read more seller stories →
+          <Link href="/testimonials" className="font-bold text-navy hover:underline">
+            Read more reviews →
           </Link>
         </p>
       </section>
 
-      {/* Cities — Ontario front and centre, other provinces coming soon */}
-      <section className="bg-mist">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading
-            eyebrow="Where we buy"
-            title="Serving homeowners across Ontario"
-            lede="From Ottawa to Windsor to Thunder Bay — with more communities added regularly."
-          />
-          {ontario && (
-            <div className="mt-12 grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
-              {ontario.cities.slice(0, 12).map((city) => (
-                <CityCard key={city.id} city={{ ...city, province: ontario }} />
-              ))}
+      {/* Dark band — form card + 3 easy steps */}
+      <section className="bg-ink">
+        <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          <div className="rounded-xl bg-white p-7 shadow-lift sm:p-8">
+            <Image
+              src="/logo.png"
+              alt={site.name}
+              width={1536}
+              height={1024}
+              className="mx-auto h-24 w-auto"
+            />
+            <h2 className="mt-4 text-center text-2xl font-extrabold">
+              Get a No-Obligation Cash Offer Today!
+            </h2>
+            <div className="mt-6">
+              <QuickLeadForm sourceSuffix="dark-band" defaultProvince="Ontario" />
             </div>
-          )}
-          <p className="mt-10">
-            <Link href="/cities" className="font-semibold text-navy hover:underline">
-              View every Ontario city we serve →
-            </Link>
-          </p>
-          {expanding.length > 0 && (
-            <p className="mt-6 border-t border-line pt-6 text-muted">
-              Expanding soon to{" "}
-              {expanding.map((p) => p.name).join(", ").replace(/, ([^,]*)$/, ", and $1")}.
-            </p>
-          )}
+          </div>
+          <div>
+            <h2 className="text-3xl font-extrabold text-white">
+              Sell Your House In 3 Easy Steps
+            </h2>
+            <ol className="mt-8 space-y-8">
+              {steps.map((s) => (
+                <li key={s.title}>
+                  <h3 className="text-xl font-bold text-white">{s.title}</h3>
+                  <p className="mt-2 leading-relaxed text-white/75">{s.body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </section>
 
-      {/* Blog */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading
-          eyebrow="Homeowner resources"
-          title="Guides for every kind of sale"
-          lede="Practical, plain-language advice on probate, taxes, tenants, timing, and everything in between."
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
+      {/* Situations grid */}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <h2 className="text-center text-3xl font-extrabold">
+          Dealing with Power of Sale? Going through Divorce? We Can Help.
+        </h2>
+        <p className="mx-auto mt-4 max-w-3xl text-center leading-relaxed text-muted">
+          Life can change quickly, and sometimes selling your house feels
+          overwhelming. That's why we buy houses across Ontario in any
+          condition and for any reason. Whatever your situation, our goal is to
+          make selling simple, fast, and free of hidden fees.
+        </p>
+        <ul className="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {situations.map((s) => (
+            <li key={s.slug}>
+              <Link
+                href={`/situations/${s.slug}`}
+                className="flex items-center gap-3 rounded-lg border border-line bg-white px-5 py-3.5 font-semibold text-ink shadow-soft transition-all hover:border-navy/40 hover:text-navy"
+              >
+                <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy-tint text-xs font-bold text-navy">✓</span>
+                {s.title}
+              </Link>
+            </li>
           ))}
-        </div>
-        <p className="mt-8">
-          <Link href="/blog" className="font-semibold text-navy hover:underline">
-            Browse all guides →
+          {extraReasons.map((r) => (
+            <li
+              key={r}
+              className="flex items-center gap-3 rounded-lg border border-line bg-white px-5 py-3.5 font-semibold text-ink shadow-soft"
+            >
+              <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy-tint text-xs font-bold text-navy">✓</span>
+              {r}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-10 text-center">
+          <Link
+            href="/get-offer"
+            className="inline-block rounded-md bg-navy px-7 py-3.5 font-bold uppercase tracking-wide text-white transition-colors hover:bg-ink"
+          >
+            Get My Cash Offer
           </Link>
         </p>
       </section>
 
-      <QuickFormBand sourceSuffix="home-closing" />
+      {/* Comparison table */}
+      <section className="bg-mist">
+        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+          <h2 className="text-center text-3xl font-extrabold">
+            Sell Your House to NorthStone Property
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-muted">
+            A cash offer is typically below full retail price — that's the
+            honest trade for speed, certainty, and zero costs. Here's the full
+            picture so you can decide with clear eyes.
+          </p>
+          <div className="mt-10">
+            <ComparisonTable />
+          </div>
+        </div>
+      </section>
+
+      {/* Cities */}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <h2 className="text-center text-3xl font-extrabold">We Buy Houses Across Ontario</h2>
+        {ontario && (
+          <ul className="mx-auto mt-10 grid max-w-5xl grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3 lg:grid-cols-4">
+            {ontario.cities.map((city) => (
+              <li key={city.id}>
+                <Link
+                  href={cityPath(ontario.slug, city.slug)}
+                  className="text-sm font-medium text-body hover:text-navy hover:underline"
+                >
+                  We buy houses in {city.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+        <p className="mt-8 text-center text-muted">
+          Expanding soon to British Columbia, Alberta, and Nova Scotia.
+        </p>
+      </section>
     </>
   );
 }

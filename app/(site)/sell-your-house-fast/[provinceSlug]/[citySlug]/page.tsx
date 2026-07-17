@@ -70,20 +70,9 @@ export default async function CityPage({ params }: { params: Promise<Params> }) 
         ]}
       />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-mist">
-        <div className="absolute inset-y-0 right-0 hidden w-[52%] lg:block" aria-hidden="true">
-          <Image
-            src="/images/city-street.jpg"
-            alt=""
-            fill
-            priority
-            sizes="52vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-mist via-mist/25 to-transparent" />
-        </div>
-        <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-8 sm:px-6 lg:pb-20">
+      {/* Hero — white, Clario-style */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-6xl px-4 pb-14 pt-6 sm:px-6">
           <Breadcrumbs
             items={[
               { name: "Cities", path: "/cities" },
@@ -91,44 +80,37 @@ export default async function CityPage({ params }: { params: Promise<Params> }) 
               { name: city.name, path },
             ]}
           />
-          <div className="mt-8 grid items-start gap-12 lg:grid-cols-[1.1fr_1fr]">
+          <div className="mt-6 grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr]">
             <div>
-              <p className="eyebrow">
-                {city.name}, {city.province.code}
-              </p>
-              <h1 className="mt-4 text-4xl font-bold leading-[1.1] sm:text-5xl">
+              <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-[2.7rem]">
                 {city.heroHeadline ?? `We Buy Houses For Cash in ${city.name}`}
               </h1>
-              <p className="mt-5 text-xl font-semibold text-ink">
-                Fast closings. No repairs. No commissions.
+              <p className="mt-4 text-2xl font-bold text-ink">
+                No Repairs. No Hassle. Just Sold.{" "}
+                <span aria-label="rated 5 stars" className="text-amber-500">★★★★★</span>
               </p>
-              <p className="mt-2 text-lg font-semibold text-stone">
-                <span aria-hidden="true">★★★★★</span>
-                <span className="ml-2 text-base font-medium text-muted">rated 5 stars by our sellers</span>
-              </p>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">{city.intro}</p>
-              <ul className="mt-8 grid max-w-lg grid-cols-1 gap-3 text-sm font-medium text-ink sm:grid-cols-3">
-                {["Offer in 24 hours", "Close in 14+ days", "$0 in fees"].map((item) => (
-                  <li key={item} className="flex items-center gap-2">
-                    <span aria-hidden="true" className="flex h-5 w-5 items-center justify-center rounded-full bg-navy-tint text-xs text-navy">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="relative mt-10 h-56 overflow-hidden rounded-2xl shadow-soft sm:h-72 lg:hidden">
-                <Image
-                  src="/images/city-street.jpg"
-                  alt="A residential street of detached brick homes"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 0px"
-                  className="object-cover"
-                />
+              <p className="mt-4 max-w-2xl leading-relaxed text-muted">{city.intro}</p>
+              <div className="mt-7 max-w-2xl">
+                <QuickLeadForm sourceSuffix="city-hero" defaultCity={city.name} defaultProvince={city.province.name} inline />
               </div>
+              <p className="mt-5">
+                <a href="tel:+13435009275" className="inline-flex items-center gap-2 text-lg font-bold text-navy hover:underline">
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  CALL US! 343-500-9275
+                </a>
+              </p>
             </div>
-            <div className="rounded-2xl bg-white p-6 shadow-lift sm:p-8">
-              <h2 className="text-2xl font-bold">Get your {city.name} cash offer</h2>
-              <p className="mb-5 mt-1 text-muted">Two fields. Takes 30 seconds.</p>
-              <QuickLeadForm sourceSuffix="city-hero" defaultCity={city.name} defaultProvince={city.province.name} />
+            <div className="relative hidden h-[340px] overflow-hidden rounded-xl lg:block">
+              <Image
+                src="/images/city-street.jpg"
+                alt={`A residential street of family homes in ${city.name}`}
+                fill
+                priority
+                sizes="30vw"
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
