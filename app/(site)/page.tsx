@@ -63,8 +63,19 @@ export default async function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/70" />
         </div>
-        <div className="relative mx-auto grid max-w-7xl items-end gap-6 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="pb-14 pt-12">
+        {/* Gab — full hero height, bottom-anchored like the reference sites */}
+        <div className="absolute bottom-0 right-0 top-10 hidden w-[44%] max-w-[640px] lg:block" aria-hidden="false">
+          <Image
+            src="/images/gab-hero.png"
+            alt="Gabriel, founder of NorthStone Property"
+            fill
+            priority
+            sizes="44vw"
+            className="object-contain object-[center_bottom]"
+          />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="pb-14 pt-12 lg:w-[58%]">
             <h1 className="text-[2.6rem] font-extrabold leading-[1.08] text-ink sm:text-[3.4rem]">
               Sell Your House Fast In Alberta & Ontario
             </h1>
@@ -91,16 +102,6 @@ export default async function HomePage() {
                 CALL US! {site.phone}
               </a>
             </p>
-          </div>
-          <div className="relative hidden h-[540px] self-end lg:block">
-            <Image
-              src="/images/gab-hero.png"
-              alt="Gabriel, founder of NorthStone Property"
-              fill
-              priority
-              sizes="40vw"
-              className="object-contain object-bottom"
-            />
           </div>
         </div>
       </section>
