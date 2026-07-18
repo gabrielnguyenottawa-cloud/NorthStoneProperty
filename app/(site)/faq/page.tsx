@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Frequently Asked Questions | NorthStone Property",
   description:
-    "Everything homeowners ask before selling to us: how cash offers work, timelines, closing, legal protection, fees, and the types of properties we buy in Alberta and Ontario.",
+    "Everything homeowners ask before selling to us: how cash offers work, timelines, closing, legal protection, fees, and the types of properties we buy in Ontario and Alberta.",
   path: "/faq",
 });
 
@@ -22,12 +22,12 @@ const categories = [
       {
         question: "Who does NorthStone Property work with?",
         answer:
-          "Homeowners across Alberta and Ontario who want a simple, certain sale — people navigating inheritances, separations, difficult tenants, homes that need work, or simply a timeline the traditional market can't meet. If you own a residential property and want it sold without the usual process, we can help.",
+          "Homeowners across Ontario and Alberta who want a simple, certain sale — people navigating inheritances, separations, difficult tenants, homes that need work, or simply a timeline the traditional market can't meet. If you own a residential property and want it sold without the usual process, we can help.",
       },
       {
         question: "Where does NorthStone Property buy houses?",
         answer:
-          "We buy houses across Alberta and Ontario — from Ottawa to Windsor to Thunder Bay, and Calgary to Edmonton to Lethbridge. Don't see your city on our list? Reach out anyway; we can often still help.",
+          "We buy houses across Ontario and Alberta — from Ottawa to Windsor to Thunder Bay, and Calgary to Edmonton to Lethbridge. Don't see your city on our list? Reach out anyway; we can often still help.",
       },
       {
         question: "Do I need to fix up my property before selling?",

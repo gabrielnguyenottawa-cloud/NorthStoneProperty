@@ -11,7 +11,7 @@ import { site } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "How It Works | Sell Your House in 3 Simple Steps",
   description:
-    "From first contact to closing day: exactly how our direct home-buying process works in Alberta and Ontario, how we calculate offers, and what happens at every step.",
+    "From first contact to closing day: exactly how our direct home-buying process works in Ontario and Alberta, how we calculate offers, and what happens at every step.",
   path: "/how-it-works",
 });
 
@@ -41,7 +41,7 @@ const faqs = [
   { question: "Does the visit cost anything?", answer: "No. The visit, the evaluation, and the written offer are all completely free with no obligation to accept." },
   { question: "What if I change my mind?", answer: "Until you sign the purchase agreement, you can walk away at any time — and we'll never pressure you. Even our signed agreements include the standard legal protections your lawyer will explain." },
   { question: "Do you buy homes with mortgages still on them?", answer: "Yes — most homes we buy have a mortgage. Your lawyer pays it out from the sale proceeds at closing, and you receive the balance." },
-  { question: "Who is NorthStone Property?", answer: "We're a Canadian real estate investment company that renovates and rents or resells residential properties across Alberta and Ontario. We buy directly, with our own capital — which is why we can close without financing conditions." },
+  { question: "Who is NorthStone Property?", answer: "We're a Canadian real estate investment company that renovates and rents or resells residential properties across Ontario and Alberta. We buy directly, with our own capital — which is why we can close without financing conditions." },
 ];
 
 export default function HowItWorksPage() {
@@ -60,7 +60,7 @@ export default function HowItWorksPage() {
             <p className="mt-5 text-lg leading-relaxed text-muted">
               Selling a house is usually a three-month project. We've compressed
               it into three simple steps you can complete in as little as two
-              weeks — anywhere in Alberta and Ontario.
+              weeks — anywhere in Ontario and Alberta.
             </p>
             <p className="mt-6">
               <Link

@@ -7,14 +7,16 @@ import { QuickFormBand } from "@/components/QuickFormBand";
 export const revalidate = 3600;
 
 export const metadata = buildMetadata({
-  title: "Cities We Serve | We Buy Houses in Alberta & Ontario",
+  title: "Cities We Serve | We Buy Houses in Ontario & Alberta",
   description:
-    "NorthStone Property buys houses directly from homeowners across Alberta and Ontario — from Ottawa to Windsor to Calgary. Find your city and get a cash offer in 24 hours.",
+    "NorthStone Property buys houses directly from homeowners across Ontario and Alberta — from Ottawa to Windsor to Calgary. Find your city and get a cash offer in 24 hours.",
   path: "/cities",
 });
 
 export default async function CitiesPage() {
-  const provinces = await getProvincesWithCities();
+  const provinces = (await getProvincesWithCities()).sort((a, b) =>
+    a.code === "ON" ? -1 : b.code === "ON" ? 1 : 0
+  );
 
   return (
     <>
@@ -23,7 +25,7 @@ export default async function CitiesPage() {
           <Breadcrumbs items={[{ name: "Cities", path: "/cities" }]} />
           <div className="mt-6 max-w-3xl">
             <h1 className="text-[2.6rem] font-extrabold leading-[1.08] sm:text-[3.2rem]">
-              We Buy Houses in Alberta and Ontario
+              We Buy Houses in Ontario and Alberta
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-muted">
               We buy houses directly from homeowners in these communities — and

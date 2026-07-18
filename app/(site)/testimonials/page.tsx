@@ -9,7 +9,7 @@ export const revalidate = 3600;
 export const metadata = buildMetadata({
   title: "Reviews | What Sellers Say About NorthStone Property",
   description:
-    "Read what Alberta and Ontario homeowners say about selling directly to NorthStone — inherited homes, tenanted rentals, tight timelines, and everything in between.",
+    "Read what Ontario and Alberta homeowners say about selling directly to NorthStone — inherited homes, tenanted rentals, tight timelines, and everything in between.",
   path: "/testimonials",
 });
 

@@ -41,7 +41,9 @@ const columns = [
 ];
 
 export async function Footer() {
-  const provinces = await getProvincesWithCities().catch(() => []);
+  const provinces = (await getProvincesWithCities().catch(() => [])).sort((a, b) =>
+    a.code === "ON" ? -1 : b.code === "ON" ? 1 : 0
+  );
   const footerCities = provinces.flatMap((p) =>
     p.cities.map((c) => ({ ...c, provinceSlug: p.slug, provinceCode: p.code }))
   );
@@ -87,7 +89,7 @@ export async function Footer() {
           />
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/60">
             A Canadian real estate investment company buying residential
-            properties directly from homeowners across Alberta and Ontario.
+            properties directly from homeowners across Ontario and Alberta.
           </p>
           <p className="mt-3 text-sm font-semibold text-white/75">
             Open 7 Days a Week: 8:00 AM – 8:00 PM
@@ -131,7 +133,7 @@ export async function Footer() {
         <div className="border-t border-white/10">
           <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white/50">
-              We buy houses across Alberta and Ontario
+              We buy houses across Ontario and Alberta
             </h3>
             <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3 lg:grid-cols-5">
               {footerCities.map((city) => (

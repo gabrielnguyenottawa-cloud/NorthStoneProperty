@@ -9,9 +9,9 @@ import { site } from "@/lib/site";
 export const revalidate = 3600;
 
 export const metadata = buildMetadata({
-  title: "We Buy Houses For Cash in Alberta & Ontario | Offer in 24 Hours | NorthStone Property",
+  title: "We Buy Houses For Cash in Ontario & Alberta | Offer in 24 Hours | NorthStone Property",
   description:
-    "Sell your house fast, as-is, with no fees or commissions. NorthStone Property buys homes directly from owners across Alberta & Ontario. Written cash offer in 24 hours.",
+    "Sell your house fast, as-is, with no fees or commissions. NorthStone Property buys homes directly from owners across Ontario & Alberta. Written cash offer in 24 hours.",
   path: "/",
 });
 
@@ -46,6 +46,7 @@ export default async function HomePage() {
     getTestimonials(true),
   ]);
   const ontario = provinces.find((p) => p.code === "ON");
+  const orderedProvinces = [...provinces].sort((a, b) => (a.code === "ON" ? -1 : b.code === "ON" ? 1 : 0));
 
   return (
     <>
@@ -77,14 +78,14 @@ export default async function HomePage() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
           <div className="pb-14 pt-12 lg:w-[58%]">
             <h1 className="text-[2.6rem] font-extrabold leading-[1.08] text-ink sm:text-[3.4rem]">
-              Sell Your House Fast In Alberta & Ontario
+              Sell Your House Fast In Ontario & Alberta
             </h1>
             <p className="mt-5 text-[1.7rem] font-bold leading-snug text-ink">
               No Repairs. No Hassle. Just Sold.{" "}
               <span aria-label="rated 5 stars" className="text-amber-500">★★★★★</span>
             </p>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-body">
-              At NorthStone Property, we buy houses in Alberta and Ontario and
+              At NorthStone Property, we buy houses in Ontario and Alberta and
               make selling your home simple, fast, and fair. If you're looking
               to sell your house without the stress of repairs, showings, or
               agent fees, we're here to help. As a trusted local cash home
@@ -119,7 +120,7 @@ export default async function HomePage() {
             />
           </div>
           <div>
-            <h2 className="text-4xl font-extrabold">We Buy Houses in Alberta and Ontario</h2>
+            <h2 className="text-4xl font-extrabold">We Buy Houses in Ontario and Alberta</h2>
             <p className="mt-4 leading-relaxed text-body">
               We give homeowners a simple, stress-free way to sell their house.
               Our mission is to provide clear solutions and fair cash offers so
@@ -228,7 +229,7 @@ export default async function HomePage() {
         </h2>
         <p className="mx-auto mt-4 max-w-3xl text-center leading-relaxed text-muted">
           Life can change quickly, and sometimes selling your house feels
-          overwhelming. That's why we buy houses across Alberta and Ontario in any
+          overwhelming. That's why we buy houses across Ontario and Alberta in any
           condition and for any reason. Whatever your situation, our goal is to
           make selling simple, fast, and free of hidden fees.
         </p>
@@ -284,10 +285,10 @@ export default async function HomePage() {
       {/* Cities */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <h2 className="text-center text-4xl font-extrabold">
-          We Buy Houses in Alberta and Ontario
+          We Buy Houses in Ontario and Alberta
         </h2>
         <div className="mt-12 space-y-12">
-          {provinces.map((province) => (
+          {orderedProvinces.map((province) => (
             <div key={province.id}>
               <h3 className="text-2xl font-extrabold">{province.name}</h3>
               <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3 lg:grid-cols-4">
