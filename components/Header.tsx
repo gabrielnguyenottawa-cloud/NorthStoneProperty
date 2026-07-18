@@ -7,12 +7,10 @@ import { site } from "@/lib/site";
 
 const nav = [
   { label: "How It Works", href: "/how-it-works" },
-  { label: "Situations", href: "/situations" },
-  { label: "Cities", href: "/cities" },
-  { label: "Referral Rewards", href: "/referrals" },
-  { label: "Reviews", href: "/testimonials" },
+  { label: "FAQs", href: "/faq" },
   { label: "Blog", href: "/blog" },
-  { label: "FAQ", href: "/faq" },
+  { label: "Reviews", href: "/testimonials" },
+  { label: "About Us", href: "/about" },
 ];
 
 export function Header() {
@@ -37,7 +35,7 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-semibold text-body transition-colors hover:text-navy"
+              className="text-[0.95rem] font-bold uppercase tracking-wide text-body transition-colors hover:text-navy"
             >
               {item.label}
             </Link>

@@ -154,10 +154,44 @@ export default async function HomePage() {
         </p>
       </section>
 
-      {/* Dark band — form card + 3 easy steps */}
-      <section className="bg-ink">
-        <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <div className="rounded-xl bg-white p-7 shadow-lift sm:p-8">
+      {/* 3 easy steps — icon squares, Clario style — + form card */}
+      <section className="border-t border-line bg-white">
+        <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+          <div>
+            <h2 className="text-4xl font-extrabold">Sell Your House in 3 Easy Steps</h2>
+            <ol className="mt-10 space-y-10">
+              {steps.map((s, i) => (
+                <li key={s.title} className="flex gap-6">
+                  <span aria-hidden="true" className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-ink text-white">
+                    {i === 0 && (
+                      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                        <path d="M12 8v6M9.5 9.5h3.75a1.75 1.75 0 0 1 0 3.5H10" />
+                      </svg>
+                    )}
+                    {i === 1 && (
+                      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="5" width="20" height="14" rx="2" />
+                        <path d="M2 10h20M7 15h4" />
+                      </svg>
+                    )}
+                    {i === 2 && (
+                      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m3 11 9-8 9 8" />
+                        <path d="M5 9.5V21h14V9.5" />
+                        <path d="M9 21v-6h6v6" />
+                      </svg>
+                    )}
+                  </span>
+                  <div>
+                    <h3 className="text-2xl font-extrabold">{s.title}</h3>
+                    <p className="mt-2 text-lg leading-relaxed text-body">{s.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div className="rounded-xl border border-line bg-mist p-7 shadow-lift sm:p-8">
             <Image
               src="/logo.png"
               alt={site.name}
@@ -169,21 +203,8 @@ export default async function HomePage() {
               Get a No-Obligation Cash Offer Today!
             </h2>
             <div className="mt-6">
-              <QuickLeadForm sourceSuffix="dark-band" defaultProvince="Ontario" />
+              <QuickLeadForm sourceSuffix="steps-card" defaultProvince="Ontario" />
             </div>
-          </div>
-          <div>
-            <h2 className="text-4xl font-extrabold text-white">
-              Sell Your House In 3 Easy Steps
-            </h2>
-            <ol className="mt-8 space-y-8">
-              {steps.map((s) => (
-                <li key={s.title}>
-                  <h3 className="text-xl font-bold text-white">{s.title}</h3>
-                  <p className="mt-2 leading-relaxed text-white/75">{s.body}</p>
-                </li>
-              ))}
-            </ol>
           </div>
         </div>
       </section>
