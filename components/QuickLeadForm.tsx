@@ -9,6 +9,8 @@ type Props = {
   defaultProvince?: string;
   /** Inline = fields side by side on desktop (hero/band sections). */
   inline?: boolean;
+  /** Render helper text for a dark background. */
+  dark?: boolean;
 };
 
 const inputClass =
@@ -18,7 +20,7 @@ const iconClass =
   "pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-navy";
 
 /** Two fields, one big button. Everything else is gathered on the follow-up call. */
-export function QuickLeadForm({ sourceSuffix, defaultCity, defaultProvince, inline = false }: Props) {
+export function QuickLeadForm({ sourceSuffix, defaultCity, defaultProvince, inline = false, dark = false }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const [submitting, setSubmitting] = useState(false);
@@ -59,7 +61,7 @@ export function QuickLeadForm({ sourceSuffix, defaultCity, defaultProvince, inli
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className={inline ? "grid gap-4 sm:grid-cols-[1.3fr_1fr]" : "space-y-4"}>
+      <div className={inline ? "grid gap-4 sm:grid-cols-[1.25fr_1fr_auto]" : "space-y-4"}>
         <div className="relative">
           <svg aria-hidden="true" className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
@@ -97,15 +99,25 @@ export function QuickLeadForm({ sourceSuffix, defaultCity, defaultProvince, inli
             placeholder="Phone"
           />
         </div>
+        {inline && (
+          <button
+            type="submit"
+            disabled={submitting}
+            className="w-full whitespace-nowrap rounded-md bg-ink px-8 py-4 text-lg font-bold uppercase tracking-wide text-white transition-colors hover:bg-navy-deep disabled:opacity-60 sm:w-auto"
+          >
+            {submitting ? "Sending…" : "Get My Cash Offer"}
+          </button>
+        )}
       </div>
-
-      <button
-        type="submit"
-        disabled={submitting}
-        className={`rounded-md bg-navy px-12 py-5 text-xl font-bold uppercase tracking-wide text-white transition-colors hover:bg-ink disabled:opacity-60 ${inline ? "w-full sm:w-auto" : "w-full"}`}
-      >
-        {submitting ? "Sending…" : "Get My Cash Offer!"}
-      </button>
+      {!inline && (
+        <button
+          type="submit"
+          disabled={submitting}
+          className="w-full rounded-md bg-navy px-12 py-5 text-xl font-bold uppercase tracking-wide text-white transition-colors hover:bg-ink disabled:opacity-60"
+        >
+          {submitting ? "Sending…" : "Get My Cash Offer!"}
+        </button>
+      )}
 
       {error && (
         <p role="alert" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
@@ -113,7 +125,7 @@ export function QuickLeadForm({ sourceSuffix, defaultCity, defaultProvince, inli
         </p>
       )}
 
-      <p className="text-xs leading-relaxed text-muted">
+      <p className={`text-xs leading-relaxed ${dark ? "text-white/60" : "text-muted"}`}>
         By requesting an offer you agree to be contacted about your property by
         phone, text, or email. No spam, no obligation — see our privacy policy.
       </p>
