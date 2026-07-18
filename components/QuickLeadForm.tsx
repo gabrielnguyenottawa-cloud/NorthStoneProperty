@@ -12,7 +12,7 @@ type Props = {
 };
 
 const inputClass =
-  "w-full rounded-lg border border-line bg-white px-4 py-3 text-base text-body placeholder:text-muted/70 focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/20";
+  "w-full rounded-lg border-2 border-line bg-white px-4 py-4 text-lg text-body placeholder:text-muted/70 focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/20";
 
 /** Two fields, one button. Everything else is gathered on the follow-up call. */
 export function QuickLeadForm({ sourceSuffix, defaultCity, defaultProvince, inline = false }: Props) {
@@ -89,7 +89,7 @@ export function QuickLeadForm({ sourceSuffix, defaultCity, defaultProvince, inli
         <button
           type="submit"
           disabled={submitting}
-          className="w-full whitespace-nowrap rounded-md bg-navy px-7 py-3.5 text-base font-bold uppercase tracking-wide text-white transition-colors hover:bg-ink disabled:opacity-60 sm:w-auto"
+          className="w-full whitespace-nowrap rounded-md bg-navy px-8 py-4 text-lg font-bold uppercase tracking-wide text-white transition-colors hover:bg-ink disabled:opacity-60 sm:w-auto"
         >
           {submitting ? "Sending…" : "Get My Cash Offer"}
         </button>

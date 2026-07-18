@@ -60,6 +60,18 @@ export const referralSchema = z.object({
 
 export type ReferralInput = z.infer<typeof referralSchema>;
 
+/** General contact-form message (no property required). */
+export const contactSchema = z.object({
+  contact: z.literal(true),
+  name: z.string().min(2, "Please enter your name").max(120),
+  phone: z.string().min(7, "Please enter a valid phone number").max(25),
+  email: z.string().email("Please enter a valid email").optional().or(z.literal("")),
+  message: z.string().min(5, "Please enter your question or comment").max(2000),
+  sourcePath: z.string().max(300).optional(),
+});
+
+export type ContactInput = z.infer<typeof contactSchema>;
+
 export const propertyTypes = leadSchema.shape.propertyType.options;
 export const conditions = leadSchema.shape.condition.options;
 export const timelines = leadSchema.shape.timeline.options;

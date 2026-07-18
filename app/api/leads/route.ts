@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { leadSchema, quickLeadSchema, referralSchema } from "@/lib/leads";
+import { contactSchema, leadSchema, quickLeadSchema, referralSchema } from "@/lib/leads";
 import { site } from "@/lib/site";
 
 export async function POST(request: Request) {
@@ -9,6 +9,44 @@ export async function POST(request: Request) {
     json = await request.json();
   } catch {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  }
+
+  // General contact message: no property attached.
+  const isContact =
+    typeof json === "object" && json !== null && (json as { contact?: unknown }).contact === true;
+
+  if (isContact) {
+    const parsed = contactSchema.safeParse(json);
+    if (!parsed.success) {
+      const first = parsed.error.issues[0];
+      return NextResponse.json(
+        { error: first?.message ?? "Please check the form and try again." },
+        { status: 422 }
+      );
+    }
+    const data = parsed.data;
+    const lead = await prisma.lead.create({
+      data: {
+        name: data.name,
+        phone: data.phone,
+        email: data.email || "",
+        address: "",
+        city: "",
+        province: "Ontario",
+        postalCode: "",
+        propertyType: "Other",
+        condition: "Needs minor work",
+        timeline: "Just exploring",
+        reason: "Contact form message",
+        notes: `CONTACT MESSAGE: ${data.message}`,
+        consent: true,
+        sourcePath: data.sourcePath ?? null,
+      },
+    });
+    await sendNotification(lead).catch((err) =>
+      console.error("Lead email notification failed:", err)
+    );
+    return NextResponse.json({ ok: true, id: lead.id }, { status: 201 });
   }
 
   // Referral program: a third party sends us a seller, earns $2,000 at closing.

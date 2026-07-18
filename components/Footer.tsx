@@ -42,7 +42,9 @@ const columns = [
 
 export async function Footer() {
   const provinces = await getProvincesWithCities().catch(() => []);
-  const ontario = provinces.find((p) => p.code === "ON");
+  const footerCities = provinces.flatMap((p) =>
+    p.cities.map((c) => ({ ...c, provinceSlug: p.slug, provinceCode: p.code }))
+  );
 
   return (
     <footer className="bg-ink text-white">
@@ -85,8 +87,10 @@ export async function Footer() {
           />
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/60">
             A Canadian real estate investment company buying residential
-            properties directly from homeowners across Ontario — expanding
-            soon to British Columbia, Alberta, and Nova Scotia.
+            properties directly from homeowners across Alberta and Ontario.
+          </p>
+          <p className="mt-3 text-sm font-semibold text-white/75">
+            Open 7 Days a Week: 8:00 AM – 8:00 PM
           </p>
           <p className="mt-4 text-sm text-white/60">
             {site.address.streetAddress}
@@ -122,21 +126,21 @@ export async function Footer() {
         ))}
       </div>
 
-      {/* City links — every Ontario landing page, linked from every page */}
-      {ontario && ontario.cities.length > 0 && (
+      {/* City links — every landing page, linked from every page */}
+      {footerCities.length > 0 && (
         <div className="border-t border-white/10">
           <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white/50">
-              We buy houses across Ontario
+              We buy houses across Alberta and Ontario
             </h3>
             <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3 lg:grid-cols-5">
-              {ontario.cities.map((city) => (
+              {footerCities.map((city) => (
                 <li key={city.id}>
                   <Link
-                    href={cityPath(ontario.slug, city.slug)}
+                    href={cityPath(city.provinceSlug, city.slug)}
                     className="text-xs text-white/60 hover:text-white"
                   >
-                    We buy houses in {city.name}
+                    We buy houses in {city.name}, {city.provinceCode}
                   </Link>
                 </li>
               ))}

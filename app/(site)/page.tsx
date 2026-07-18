@@ -9,9 +9,9 @@ import { site } from "@/lib/site";
 export const revalidate = 3600;
 
 export const metadata = buildMetadata({
-  title: "We Buy Houses For Cash in Ontario | Offer in 24 Hours | NorthStone Property",
+  title: "We Buy Houses For Cash in Alberta & Ontario | Offer in 24 Hours | NorthStone Property",
   description:
-    "Sell your house fast, as-is, with no fees or commissions. NorthStone Property buys homes directly from owners across Ontario. Written cash offer in 24 hours.",
+    "Sell your house fast, as-is, with no fees or commissions. NorthStone Property buys homes directly from owners across Alberta & Ontario. Written cash offer in 24 hours.",
   path: "/",
 });
 
@@ -53,15 +53,15 @@ export default async function HomePage() {
       <section className="bg-white">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-14 pt-10 sm:px-6 lg:grid-cols-[1.25fr_0.75fr]">
           <div>
-            <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-[2.9rem]">
-              Sell Your House Fast In Ontario
+            <h1 className="text-[2.6rem] font-extrabold leading-[1.08] sm:text-[3.4rem]">
+              Sell Your House Fast In Alberta & Ontario
             </h1>
-            <p className="mt-4 text-2xl font-bold text-ink">
+            <p className="mt-5 text-[1.7rem] font-bold leading-snug text-ink">
               No Repairs. No Hassle. Just Sold.{" "}
               <span aria-label="rated 5 stars" className="text-amber-500">★★★★★</span>
             </p>
-            <p className="mt-4 max-w-2xl leading-relaxed text-muted">
-              At NorthStone Property, we buy houses in Ontario and make selling
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+              At NorthStone Property, we buy houses in Alberta and Ontario and make selling
               your home simple, fast, and fair. If you're looking to sell your
               house without the stress of repairs, showings, or agent fees,
               we're here to help. As a trusted local cash home buyer, we
@@ -107,7 +107,7 @@ export default async function HomePage() {
             />
           </div>
           <div>
-            <h2 className="text-3xl font-extrabold">We Buy Houses in Ontario</h2>
+            <h2 className="text-4xl font-extrabold">We Buy Houses in Alberta and Ontario</h2>
             <p className="mt-4 leading-relaxed text-body">
               We give homeowners a simple, stress-free way to sell their house.
               Our mission is to provide clear solutions and fair cash offers so
@@ -133,7 +133,7 @@ export default async function HomePage() {
 
       {/* Reviews */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <h2 className="text-center text-3xl font-extrabold">What Our Sellers Say</h2>
+        <h2 className="text-center text-4xl font-extrabold">What Our Sellers Say</h2>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {testimonials.slice(0, 3).map((t) => (
             <figure key={t.id} className="rounded-xl border border-line bg-white p-7 shadow-soft">
@@ -173,7 +173,7 @@ export default async function HomePage() {
             </div>
           </div>
           <div>
-            <h2 className="text-3xl font-extrabold text-white">
+            <h2 className="text-4xl font-extrabold text-white">
               Sell Your House In 3 Easy Steps
             </h2>
             <ol className="mt-8 space-y-8">
@@ -190,12 +190,12 @@ export default async function HomePage() {
 
       {/* Situations grid */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <h2 className="text-center text-3xl font-extrabold">
+        <h2 className="text-center text-4xl font-extrabold">
           Dealing with Power of Sale? Going through Divorce? We Can Help.
         </h2>
         <p className="mx-auto mt-4 max-w-3xl text-center leading-relaxed text-muted">
           Life can change quickly, and sometimes selling your house feels
-          overwhelming. That's why we buy houses across Ontario in any
+          overwhelming. That's why we buy houses across Alberta and Ontario in any
           condition and for any reason. Whatever your situation, our goal is to
           make selling simple, fast, and free of hidden fees.
         </p>
@@ -234,7 +234,7 @@ export default async function HomePage() {
       {/* Comparison table */}
       <section className="bg-mist">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
-          <h2 className="text-center text-3xl font-extrabold">
+          <h2 className="text-center text-4xl font-extrabold">
             Sell Your House to NorthStone Property
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-muted">
@@ -250,24 +250,28 @@ export default async function HomePage() {
 
       {/* Cities */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <h2 className="text-center text-3xl font-extrabold">We Buy Houses Across Ontario</h2>
-        {ontario && (
-          <ul className="mx-auto mt-10 grid max-w-5xl grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3 lg:grid-cols-4">
-            {ontario.cities.map((city) => (
-              <li key={city.id}>
-                <Link
-                  href={cityPath(ontario.slug, city.slug)}
-                  className="text-sm font-medium text-body hover:text-navy hover:underline"
-                >
-                  We buy houses in {city.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-        <p className="mt-8 text-center text-muted">
-          Expanding soon to British Columbia, Alberta, and Nova Scotia.
-        </p>
+        <h2 className="text-center text-4xl font-extrabold">
+          We Buy Houses in Alberta and Ontario
+        </h2>
+        <div className="mt-12 space-y-12">
+          {provinces.map((province) => (
+            <div key={province.id}>
+              <h3 className="text-2xl font-extrabold">{province.name}</h3>
+              <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3 lg:grid-cols-4">
+                {province.cities.map((city) => (
+                  <li key={city.id}>
+                    <Link
+                      href={cityPath(province.slug, city.slug)}
+                      className="font-medium text-body hover:text-navy hover:underline"
+                    >
+                      We buy houses in {city.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </section>
     </>
   );
