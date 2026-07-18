@@ -131,29 +131,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Reviews */}
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <h2 className="text-center text-4xl font-extrabold">What Our Sellers Say</h2>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {testimonials.slice(0, 3).map((t) => (
-            <figure key={t.id} className="rounded-xl border border-line bg-white p-7 shadow-soft">
-              <div aria-label={`${t.rating} out of 5 stars`} className="text-xl text-amber-500">
-                {"★".repeat(t.rating)}
-              </div>
-              <blockquote className="mt-4 leading-relaxed text-body">“{t.quote}”</blockquote>
-              <figcaption className="mt-4 font-bold text-ink">
-                {t.name} <span className="font-medium text-muted">· {t.location}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-        <p className="mt-8 text-center">
-          <Link href="/testimonials" className="font-bold text-navy hover:underline">
-            Read more reviews →
-          </Link>
-        </p>
-      </section>
-
       {/* 3 easy steps — icon squares, Clario style — + form card */}
       <section className="border-t border-line bg-white">
         <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
@@ -207,6 +184,29 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Reviews */}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <h2 className="text-center text-4xl font-extrabold">What Our Sellers Say</h2>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {testimonials.slice(0, 3).map((t) => (
+            <figure key={t.id} className="rounded-xl border border-line bg-white p-7 shadow-soft">
+              <div aria-label={`${t.rating} out of 5 stars`} className="text-xl text-amber-500">
+                {"★".repeat(t.rating)}
+              </div>
+              <blockquote className="mt-4 leading-relaxed text-body">“{t.quote}”</blockquote>
+              <figcaption className="mt-4 font-bold text-ink">
+                {t.name} <span className="font-medium text-muted">· {t.location}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <p className="mt-8 text-center">
+          <Link href="/testimonials" className="font-bold text-navy hover:underline">
+            Read more reviews →
+          </Link>
+        </p>
       </section>
 
       {/* Situations grid */}
