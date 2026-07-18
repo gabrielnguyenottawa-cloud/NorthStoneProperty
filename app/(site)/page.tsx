@@ -49,46 +49,59 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero — white, headline left, photo right, inline form */}
-      <section className="bg-white">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-14 pt-10 sm:px-6 lg:grid-cols-[1.25fr_0.75fr]">
-          <div>
-            <h1 className="text-[2.6rem] font-extrabold leading-[1.08] sm:text-[3.4rem]">
+      {/* Hero — faded aerial-neighbourhood background, big person slot right */}
+      <section className="relative overflow-hidden bg-white">
+        {/* Subtle greyscale houses texture, like the reference sites */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <Image
+            src="/images/city-street.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-[0.13] grayscale"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/70" />
+        </div>
+        <div className="relative mx-auto grid max-w-7xl items-end gap-6 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="pb-14 pt-12">
+            <h1 className="text-[2.6rem] font-extrabold leading-[1.08] text-ink sm:text-[3.4rem]">
               Sell Your House Fast In Alberta & Ontario
             </h1>
             <p className="mt-5 text-[1.7rem] font-bold leading-snug text-ink">
               No Repairs. No Hassle. Just Sold.{" "}
               <span aria-label="rated 5 stars" className="text-amber-500">★★★★★</span>
             </p>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
-              At NorthStone Property, we buy houses in Alberta and Ontario and make selling
-              your home simple, fast, and fair. If you're looking to sell your
-              house without the stress of repairs, showings, or agent fees,
-              we're here to help. As a trusted local cash home buyer, we
-              provide honest offers and a smooth process that puts you in
-              control.
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-body">
+              At NorthStone Property, we buy houses in Alberta and Ontario and
+              make selling your home simple, fast, and fair. If you're looking
+              to sell your house without the stress of repairs, showings, or
+              agent fees, we're here to help. As a trusted local cash home
+              buyer, we provide honest offers and a smooth process that puts
+              you in control.
             </p>
             <div className="mt-7 max-w-2xl">
               <QuickLeadForm sourceSuffix="hero" defaultProvince="Ontario" inline />
             </div>
             <p className="mt-5">
-              <a href={site.phoneHref} className="inline-flex items-center gap-2 text-lg font-bold text-navy hover:underline">
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <a href={site.phoneHref} className="inline-flex items-center gap-2 text-xl font-bold text-navy hover:underline">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
                 CALL US! {site.phone}
               </a>
             </p>
           </div>
-          {/* Swap for Gabriel's cutout photo when it lands */}
-          <div className="relative hidden h-[380px] overflow-hidden rounded-xl lg:block">
+          {/* Gab's cutout photo drops in here: save as public/images/gab-hero.png
+              (transparent background, standing pose) and swap the src below. */}
+          <div className="relative hidden h-[520px] self-end lg:block">
             <Image
               src="/images/hero-warm.jpg"
               alt="A family home purchased by NorthStone Property"
               fill
               priority
-              sizes="30vw"
-              className="object-cover"
+              sizes="40vw"
+              className="object-cover object-bottom [mask-image:linear-gradient(to_right,transparent,black_18%)]"
             />
           </div>
         </div>

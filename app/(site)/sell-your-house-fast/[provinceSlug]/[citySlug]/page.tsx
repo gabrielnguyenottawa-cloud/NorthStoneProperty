@@ -70,9 +70,20 @@ export default async function CityPage({ params }: { params: Promise<Params> }) 
         ]}
       />
 
-      {/* Hero — white, Clario-style */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-6xl px-4 pb-14 pt-6 sm:px-6">
+      {/* Hero — faded neighbourhood texture, Clario-style */}
+      <section className="relative overflow-hidden bg-white">
+        <div className="absolute inset-0" aria-hidden="true">
+          <Image
+            src="/images/city-street.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-[0.13] grayscale"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/70" />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-4 pb-14 pt-6 sm:px-6">
           <Breadcrumbs
             items={[
               { name: "Cities", path: "/cities" },
