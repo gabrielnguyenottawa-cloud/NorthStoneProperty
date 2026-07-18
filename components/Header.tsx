@@ -18,7 +18,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-soft">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
+      <div className="mx-auto flex h-24 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
         <Link href="/" className="flex items-center" aria-label={`${site.name} — home`}>
           <Image
             src="/logo.png"
@@ -26,7 +26,7 @@ export function Header() {
             width={1536}
             height={1024}
             priority
-            className="h-16 w-auto"
+            className="h-[5.25rem] w-auto"
           />
         </Link>
 

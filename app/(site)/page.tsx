@@ -35,9 +35,20 @@ const extraReasons = [
   "Downsizing to something simpler",
   "Behind on mortgage payments",
   "Bad tenants or vacant rental",
-  "Retiring or moving to assisted living",
+  "Retiring or assisted living",
   "Just want a fast, certain sale",
 ];
+
+const shortLabels: Record<string, string> = {
+  "Avoid Foreclosure / Power of Sale": "Avoid Foreclosure / Power of Sale",
+  "Downsizing or Estate Sale": "Downsizing or Estate Sale",
+  "Sell a Fire or Water Damaged Home": "Fire or Water Damaged Home",
+  "Sell a Hoarder Home": "Sell a Hoarder Home",
+  "Sell a House with Problem Tenants": "Problem Tenants",
+  "Sell a Vacant Property": "Sell a Vacant Property",
+  "Sell an Inherited House": "Sell an Inherited House",
+  "Selling During Divorce or Separation": "Divorce or Separation",
+};
 
 export default async function HomePage() {
   const [provinces, situations, testimonials] = await Promise.all([
@@ -93,8 +104,8 @@ export default async function HomePage() {
               and make selling your home simple, fast, and fair. If you're
               looking to sell your house without the stress of repairs,
               showings, or agent fees, we're here to help. As a trusted local
-              cash home buyer, we provide honest offers and a smooth process
-              that puts you in control.
+              cash home buyer, we provide honest offers and a process that puts
+              you in control.
             </p>
             <div className="mt-8 text-left">
               <QuickLeadForm sourceSuffix="hero" defaultProvince="Ontario" inline dark />
@@ -243,7 +254,7 @@ export default async function HomePage() {
                 className="flex items-center gap-3 rounded-lg border border-line bg-white px-5 py-3.5 font-semibold text-ink shadow-soft transition-all hover:border-navy/40 hover:text-navy"
               >
                 <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy-tint text-xs font-bold text-navy">✓</span>
-                {s.title}
+                <span className="truncate">{shortLabels[s.title] ?? s.title}</span>
               </Link>
             </li>
           ))}
@@ -253,7 +264,7 @@ export default async function HomePage() {
               className="flex items-center gap-3 rounded-lg border border-line bg-white px-5 py-3.5 font-semibold text-ink shadow-soft"
             >
               <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy-tint text-xs font-bold text-navy">✓</span>
-              {r}
+              <span className="truncate">{r}</span>
             </li>
           ))}
         </ul>

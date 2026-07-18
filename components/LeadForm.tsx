@@ -16,7 +16,7 @@ type Props = {
 };
 
 const inputClass =
-  "w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-sm text-body placeholder:text-muted/70 focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/20";
+  "w-full rounded-lg border-2 border-line bg-white px-4 py-3.5 text-base text-body placeholder:text-muted/70 focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/20";
 const labelClass = "mb-1.5 block text-sm font-medium text-ink";
 
 export function LeadForm({ compact = false, sourceSuffix, defaultCity, defaultProvince }: Props) {
@@ -198,9 +198,9 @@ export function LeadForm({ compact = false, sourceSuffix, defaultCity, defaultPr
       <button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-full bg-navy px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-navy-deep disabled:opacity-60"
+        className="w-full rounded-md bg-navy px-8 py-4 text-lg font-bold uppercase tracking-wide text-white transition-colors hover:bg-ink disabled:opacity-60"
       >
-        {submitting ? "Sending…" : "Get my cash offer"}
+        {submitting ? "Sending…" : "Get My Cash Offer!"}
       </button>
       <p className="text-center text-xs text-muted">
         Written offer within 24 hours · No fees · No obligation

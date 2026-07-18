@@ -12,7 +12,7 @@ const columns = [
       { label: "How it works", href: "/how-it-works" },
       { label: "Why choose us", href: "/why-choose-us" },
       { label: "Testimonials", href: "/testimonials" },
-      { label: "Referral program — earn $2,000", href: "/referrals" },
+      { label: "Referral Rewards", href: "/referrals" },
       { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/contact" },
     ],
@@ -140,7 +140,7 @@ export async function Footer() {
                 <li key={city.id}>
                   <Link
                     href={cityPath(city.provinceSlug, city.slug)}
-                    className="text-xs text-white/60 hover:text-white"
+                    className="whitespace-nowrap text-xs text-white/60 hover:text-white"
                   >
                     We buy houses in {city.name}, {city.provinceCode}
                   </Link>

@@ -70,59 +70,60 @@ export default async function CityPage({ params }: { params: Promise<Params> }) 
         ]}
       />
 
-      {/* Hero — faded neighbourhood texture, Clario-style */}
-      <section className="relative overflow-hidden bg-white">
-        <div className="absolute inset-0" aria-hidden="true">
+      {/* Hero — solid navy with Gab, matching the homepage */}
+      <section className="relative overflow-hidden bg-navy">
+        <div className="absolute inset-0 opacity-[0.06]" aria-hidden="true">
           <Image
             src="/images/city-street.jpg"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-[0.13] grayscale"
+            className="object-cover grayscale"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/70" />
         </div>
-        <div className="relative mx-auto max-w-6xl px-4 pb-14 pt-6 sm:px-6">
-          <Breadcrumbs
-            items={[
-              { name: "Cities", path: "/cities" },
-              { name: city.province.name, path: "/cities" },
-              { name: city.name, path },
-            ]}
+        <div
+          aria-hidden="true"
+          className="absolute bottom-0 left-0 right-0 h-14 bg-white [clip-path:polygon(0_100%,0_55%,100%_0,100%_100%)]"
+        />
+        <div className="absolute bottom-0 right-0 top-8 hidden w-[40%] max-w-[560px] lg:block">
+          <Image
+            src="/images/gab-hero.png"
+            alt="Gabriel, founder of NorthStone Property"
+            fill
+            priority
+            sizes="40vw"
+            className="object-contain object-[center_bottom]"
           />
-          <div className="mt-6 grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr]">
-            <div>
-              <h1 className="text-4xl font-extrabold leading-[1.1] sm:text-[2.7rem]">
-                {city.heroHeadline ?? `We Buy Houses For Cash in ${city.name}`}
-              </h1>
-              <p className="mt-4 text-2xl font-bold text-ink">
-                No Repairs. No Hassle. Just Sold.{" "}
-                <span aria-label="rated 5 stars" className="text-amber-500">★★★★★</span>
-              </p>
-              <p className="mt-4 max-w-2xl leading-relaxed text-muted">{city.intro}</p>
-              <div className="mt-7 max-w-2xl">
-                <QuickLeadForm sourceSuffix="city-hero" defaultCity={city.name} defaultProvince={city.province.name} inline />
-              </div>
-              <p className="mt-5">
-                <a href="tel:+13435009275" className="inline-flex items-center gap-2 text-lg font-bold text-navy hover:underline">
-                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                  </svg>
-                  CALL US! 343-500-9275
-                </a>
-              </p>
+        </div>
+        <div className="relative mx-auto max-w-7xl px-4 pt-5 sm:px-6">
+          <div className="[&_nav]:text-white/60 [&_nav_a:hover]:text-white [&_nav_span]:text-white/85">
+            <Breadcrumbs
+              items={[
+                { name: "Cities", path: "/cities" },
+                { name: city.province.name, path: "/cities" },
+                { name: city.name, path },
+              ]}
+            />
+          </div>
+          <div className="pb-24 pt-8 text-center lg:w-[58%]">
+            <h1 className="text-[2.3rem] font-extrabold uppercase leading-[1.12] text-white sm:text-[2.8rem]">
+              {city.heroHeadline ?? `We Buy Houses For Cash in ${city.name}`}
+            </h1>
+            <p className="mt-4 text-[1.7rem] font-bold leading-snug text-white/60">
+              No Repairs. No Hassle. Just Sold.{" "}
+              <span aria-label="rated 5 stars" className="text-amber-400">★★★★★</span>
+            </p>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/90">{city.intro}</p>
+            <div className="mt-8 text-left">
+              <QuickLeadForm sourceSuffix="city-hero" defaultCity={city.name} defaultProvince={city.province.name} inline dark />
             </div>
-            <div className="relative hidden h-[340px] overflow-hidden rounded-xl lg:block">
-              <Image
-                src="/images/city-street.jpg"
-                alt={`A residential street of family homes in ${city.name}`}
-                fill
-                priority
-                sizes="30vw"
-                className="object-cover"
-              />
-            </div>
+            <p className="mt-6 text-lg font-semibold text-white/90">
+              Fill out the form above to get started or call us at{" "}
+              <a href="tel:+13435009275" className="font-bold text-white underline hover:text-amber-400">
+                343-500-9275
+              </a>
+            </p>
           </div>
         </div>
       </section>
