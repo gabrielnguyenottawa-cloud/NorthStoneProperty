@@ -92,16 +92,14 @@ export default async function HomePage() {
               </a>
             </p>
           </div>
-          {/* Gab's cutout photo drops in here: save as public/images/gab-hero.png
-              (transparent background, standing pose) and swap the src below. */}
-          <div className="relative hidden h-[520px] self-end lg:block">
+          <div className="relative hidden h-[540px] self-end lg:block">
             <Image
-              src="/images/hero-warm.jpg"
-              alt="A family home purchased by NorthStone Property"
+              src="/images/gab-hero.png"
+              alt="Gabriel, founder of NorthStone Property"
               fill
               priority
               sizes="40vw"
-              className="object-cover object-bottom [mask-image:linear-gradient(to_right,transparent,black_18%)]"
+              className="object-contain object-bottom"
             />
           </div>
         </div>
